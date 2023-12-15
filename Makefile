@@ -16,7 +16,7 @@ DEBUG_FLAGS := -g -O0 -fsanitize=address
 INCLUDES := -Iinclude -Isrc -Ilibft/include -Iminilibx
 
 LDFLAGS := -Llibft -Lminilibx
-LDLIBS := -lft -lmlx
+LDLIBS := -lft -lmlx -lm
 
 # Flags to generate dependency files
 DEPFLAGS = -MT $@ -MMD -MP -MF $(BUILD_DIR)/$*.d
