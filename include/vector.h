@@ -58,5 +58,8 @@ t_vec3		vec3_unit(t_vec3 a);
 t_vec3		vec3_negate(t_vec3 a);
 t_vec3		vec3_project(t_vec3 v, t_vec3 onto);
 t_vec3		vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c);
+t_vec3		vec3_min(t_vec3 a, t_vec3 b);
+t_vec3		vec3_max(t_vec3 a, t_vec3 b);
+t_vec3		vec3_clamp(t_vec3 a, t_vec3 min, t_vec3 max);
 
 #endif
