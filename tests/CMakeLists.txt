@@ -22,3 +22,9 @@ file(GLOB_RECURSE VECTOR_SOURCES ${CMAKE_SOURCE_DIR}/src/vector/*.c)
 add_executable(test_vector test_vector.cpp ${VECTOR_SOURCES})
 target_link_libraries(test_vector gtest_main gtest)
 gtest_discover_tests(test_vector)
+
+## Parse config
+file(GLOB_RECURSE PARSER_SOURCES ${CMAKE_SOURCE_DIR}/src/config/*.c)
+add_executable(test_parser test_parser.cpp ${PARSER_SOURCES})
+target_link_libraries(test_parser gtest_main gtest ft)
+gtest_discover_tests(test_parser)

@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "vector.h"
 
+#define EXIT_PARSE_ERROR 2
+
 // color: [0, 255]
 
 // ration: [0, 1]
@@ -103,12 +105,8 @@ t_sphere_conf		parse_sphere(const char *line);
 t_cylinder_conf		parse_cylinder(const char *line);
 
 // internal utils
-// ("255", 0, 255) -> 255
-// ("254.9", 0, 255) -> ERROR
-// (999, 0, 255) -> ERROR
-unsigned int		parse_uint(const char *str, unsigned int min,
-						unsigned int max);
-double				parse_double(const char *str, double min, double max);
+unsigned int		parse_uint(const char *str);
+double				parse_double(const char *str);
 // "-20,0,5.5" -> t_vec3(-20, 0, 5.5)
 t_vec3				parse_vec3(const char *str);
 // "10,0,255" -> t_rgb(10, 0, 255)
