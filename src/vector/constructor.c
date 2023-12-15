@@ -21,3 +21,13 @@ t_vec3	vec3(double x, double y, double z)
 	ret.z = z;
 	return (ret);
 }
+
+t_vec3	vec3_zero(void)
+{
+	return (vec3(0, 0, 0));
+}
+
+t_vec3	vec3_one(void)
+{
+	return (vec3(1, 1, 1));
+}

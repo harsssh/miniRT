@@ -29,3 +29,15 @@ double	vec3_length(t_vec3 a)
 {
 	return (sqrt(vec3_length_squared(a)));
 }
+
+// distance
+double	vec3_distance(t_vec3 a, t_vec3 b)
+{
+	return (vec3_length(vec3_sub(a, b)));
+}
+
+// angle
+t_radian	vec3_angle(t_vec3 a, t_vec3 b)
+{
+	return (acos(vec3_dot(a, b) / (vec3_length(a) * vec3_length(b))));
+}

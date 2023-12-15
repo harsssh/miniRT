@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   constructor_axis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 12:19:25 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/15 12:19:27 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/15 14:30:17 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/15 14:30:18 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-// unit vector
-t_vec3	vec3_unit(t_vec3 a)
+// x axis
+t_vec3	vec3_x_axis(void)
 {
-	return (vec3_scale(a, 1 / vec3_length(a)));
+	return (vec3(1, 0, 0));
 }
 
-// negate
-t_vec3	vec3_negate(t_vec3 a)
+// y axis
+t_vec3	vec3_y_axis(void)
 {
-	return (vec3_scale(a, -1));
+	return (vec3(0, 1, 0));
 }
 
-// projection
-t_vec3	vec3_project(t_vec3 v, t_vec3 onto)
+// z axis
+t_vec3	vec3_z_axis(void)
 {
-	return (vec3_scale(onto, vec3_dot(v, onto) / vec3_dot(onto, onto)));
-}
-
-// addition of 3 vectors
-t_vec3	vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c)
-{
-	return (vec3_add(vec3_add(a, b), c));
+	return (vec3(0, 0, 1));
 }

@@ -23,9 +23,16 @@ typedef struct s_vec3
 	double	z;
 }			t_vec3;
 
-t_vec3		vec3(double x, double y, double z);
+typedef double t_radian;
 
-// basic operations
+t_vec3		vec3(double x, double y, double z);
+t_vec3		vec3_zero(void);
+t_vec3		vec3_one(void);
+t_vec3		vec3_axis_x(void);
+t_vec3		vec3_axis_y(void);
+t_vec3		vec3_axis_z(void);
+
+// operations
 t_vec3		vec3_add(t_vec3 a, t_vec3 b);
 t_vec3		vec3_sub(t_vec3 a, t_vec3 b);
 t_vec3		vec3_cross(t_vec3 a, t_vec3 b);
@@ -34,6 +41,13 @@ t_vec3		vec3_scale(t_vec3 a, double scale);
 double		vec3_dot(t_vec3 a, t_vec3 b);
 double		vec3_length(t_vec3 a);
 double		vec3_length_squared(t_vec3 a);
+double		vec3_distance(t_vec3 a, t_vec3 b);
+t_radian	vec3_angle(t_vec3 a, t_vec3 b);
+
+t_vec3		vec3_rotate(t_vec3 a, t_radian angle, t_vec3 axis);
+t_vec3		vec3_rotate_x(t_vec3 a, t_radian angle);
+t_vec3		vec3_rotate_y(t_vec3 a, t_radian angle);
+t_vec3		vec3_rotate_z(t_vec3 a, t_radian angle);
 
 // comparison
 bool		vec3_equal(t_vec3 a, t_vec3 b);
@@ -42,5 +56,7 @@ bool		vec3_not_equal(t_vec3 a, t_vec3 b);
 // utility
 t_vec3		vec3_unit(t_vec3 a);
 t_vec3		vec3_negate(t_vec3 a);
+t_vec3		vec3_project(t_vec3 v, t_vec3 onto);
+t_vec3		vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c);
 
 #endif
