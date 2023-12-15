@@ -1,0 +1,6 @@
+*.o
+*.d
+a.out
+miniRT
+*.a
+*.rt
