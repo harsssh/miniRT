@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 12:19:37 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/15 12:19:57 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/15 22:20:25 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 }
 
 // scalar multiplication
-t_vec3	vec3_scale(t_vec3 a, double scale)
+t_vec3	vec3_scale(double scale, t_vec3 a)
 {
 	return (vec3(a.x * scale, a.y * scale, a.z * scale));
 }

@@ -74,21 +74,21 @@ TEST(VectorTest, Cross) {
 // scale
 TEST(VectorTest, Scale) {
 	t_vec3 a = vec3(1, 2, 3);
-	t_vec3 vec = vec3_scale(a, 2);
+	t_vec3 vec = vec3_scale(2, a);
 	expect_vec3(vec, 2, 4, 6);
 }
 
 // scale 0
 TEST(VectorTest, Scale0) {
 	t_vec3 a = vec3(1, 2, 3);
-	t_vec3 vec = vec3_scale(a, 0);
+	t_vec3 vec = vec3_scale(0, a);
 	expect_vec3(vec, 0, 0, 0);
 }
 
 // scale -1
 TEST(VectorTest, ScaleMinus1) {
 	t_vec3 a = vec3(1, 2, 3);
-	t_vec3 vec = vec3_scale(a, -1);
+	t_vec3 vec = vec3_scale(-1, a);
 	expect_vec3(vec, -1, -2, -3);
 }
 

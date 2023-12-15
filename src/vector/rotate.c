@@ -25,8 +25,8 @@ t_vec3	vec3_rotate(t_vec3 a, t_radian angle, t_vec3 axis)
 	comp2 = vec3_cross(unit_axis, comp1);
 	return (vec3_add_3(
 			a,
-			vec3_scale(comp1, sin(angle)),
-			vec3_scale(comp2, (1 - cos(angle)))
+			vec3_scale(sin(angle), comp1),
+			vec3_scale((1 - cos(angle)), comp2)
 		));
 }
 
