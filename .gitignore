@@ -4,3 +4,5 @@ a.out
 miniRT
 *.a
 *.rt
+.idea
+cmake-*
