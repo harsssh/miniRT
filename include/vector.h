@@ -23,7 +23,9 @@ typedef struct s_vec3
 	double		z;
 }				t_vec3;
 
+typedef	t_vec3	t_rgb;
 typedef double	t_radian;
+typedef double	t_degree;
 
 t_vec3		vec3(double x, double y, double z);
 t_vec3		vec3_zero(void);
