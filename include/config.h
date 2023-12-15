@@ -112,4 +112,6 @@ t_vec3				parse_vec3(const char *str);
 // "10,0,255" -> t_rgb(10, 0, 255)
 t_rgb				parse_rgb(const char *str);
 
+void				exit_with_error(int status);
+
 #endif
