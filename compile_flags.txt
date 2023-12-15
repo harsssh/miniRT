@@ -1,0 +1,7 @@
+-Iinclude
+-Isrc
+-Ilibft/include
+-Iminilibx
+-Wall
+-Wextra
+-Werror
