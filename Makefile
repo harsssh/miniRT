@@ -36,7 +36,7 @@ debug: $(NAME)
 .PHONY: bonus
 bonus: all
 
-$(NAME): $(LIBFT) $(LIBREADLINE) $(OBJ)
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c

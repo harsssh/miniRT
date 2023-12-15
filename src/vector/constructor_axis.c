@@ -13,19 +13,19 @@
 #include "vector.h"
 
 // x axis
-t_vec3	vec3_x_axis(void)
+t_vec3	vec3_axis_x(void)
 {
 	return (vec3(1, 0, 0));
 }
 
 // y axis
-t_vec3	vec3_y_axis(void)
+t_vec3	vec3_axis_y(void)
 {
 	return (vec3(0, 1, 0));
 }
 
 // z axis
-t_vec3	vec3_z_axis(void)
+t_vec3	vec3_axis_z(void)
 {
 	return (vec3(0, 0, 1));
 }
