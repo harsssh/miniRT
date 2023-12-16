@@ -6,14 +6,14 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 10:22:29 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 10:22:31 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:37:15 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 #include "libft.h"
 
-static size_t count_char(const char *str, char c)
+static size_t	count_char(const char *str, char c)
 {
 	size_t	count;
 
@@ -37,9 +37,9 @@ t_vec3	parse_vec3(const char *str)
 	if (split == NULL || array_size(split) != 3)
 		exit_with_error(EXIT_PARSE_ERROR, "parse_vec3: invalid format");
 	return (vec3(
-		parse_double(split[0]),
-		parse_double(split[1]),
-		parse_double(split[2])));
+			parse_double(split[0]),
+			parse_double(split[1]),
+			parse_double(split[2])));
 }
 
 t_rgb	parse_rgb(const char *str)
@@ -54,6 +54,7 @@ t_rgb	parse_rgb(const char *str)
 		exit_with_error(EXIT_PARSE_ERROR, "parse_rgb: invalid format");
 	v = vec3(parse_uint(split[0]), parse_uint(split[1]), parse_uint(split[2]));
 	if (v.x > 255 || v.y > 255 || v.z > 255)
-		exit_with_error(EXIT_PARSE_ERROR, "parse_rgb: value out of range (0-255)");
+		exit_with_error(EXIT_PARSE_ERROR,
+			"parse_rgb: value out of range (0-255)");
 	return (v);
 }

@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:12:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 16:12:25 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/16 21:27:04 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,8 @@
 void	print_config(t_config config);
 void	print_vec(t_vec3 vec, bool newline);
 void	print_rgb(t_rgb rgb, bool newline);
+void    print_sphere_conf(t_sphere_conf conf);
+void    print_plane_conf(t_plane_conf conf);
+void    print_cylinder_conf(t_cylinder_conf conf);
 
 #endif

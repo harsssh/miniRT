@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   constructor.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/16 21:38:06 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/16 21:38:07 by kemizuki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "config.h"
 
-t_config *new_config(void)
+t_config	*new_config(void)
 {
-	t_config *config;
+	t_config	*config;
 
 	config = ft_calloc(1, sizeof(t_config));
 	config->lights = ft_list_create();
@@ -10,9 +22,9 @@ t_config *new_config(void)
 	return (config);
 }
 
-t_object *new_object(t_object_type type)
+t_object	*new_object(t_object_type type)
 {
-	t_object *object;
+	t_object	*object;
 
 	object = ft_calloc(1, sizeof(t_object));
 	object->type = type;
