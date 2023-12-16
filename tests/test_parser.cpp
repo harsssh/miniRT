@@ -289,10 +289,10 @@ TEST(ConfigTest, ParseAmbientMissingColor) {
 
 // parse_camera
 TEST(ConfigTest, ParseCamera) {
-	auto line = "C  -50,0,20  0,0,0  70";
+	auto line = "C  -50,0,20  0,0,1  70";
 	auto camera = parse_camera(line);
 	expect_vec3(camera.position, -50, 0, 20);
-	expect_vec3(camera.orientation, 0, 0, 0);
+	expect_vec3(camera.orientation, 0, 0, 1);
 	EXPECT_DOUBLE_EQ(camera.fov, 70);
 }
 
@@ -364,23 +364,23 @@ TEST(ConfigTest, ParseSphereMissingColor) {
 
 // parse_plane
 TEST(ConfigTest, ParsePlane) {
-	auto line = "pl  0,1,0  0,0,0  255,255,255";
+	auto line = "pl  0,1,0  0,0,1  255,255,255";
 	auto plane = parse_plane(line);
 	expect_vec3(plane.point, 0, 1, 0);
-	expect_vec3(plane.normal, 0, 0, 0);
+	expect_vec3(plane.normal, 0, 0, 1);
 	expect_vec3(plane.color, 255, 255, 255);
 }
 
 // parse_plane, missing point
 // expect exit
 TEST(ConfigTest, ParsePlaneMissingPoint) {
-	EXPECT_EXIT(parse_plane("pl 0,0,0 255,255,255"), ::testing::ExitedWithCode(EXIT_PARSE_ERROR), "");
+	EXPECT_EXIT(parse_plane("pl 0,0,1 255,255,255"), ::testing::ExitedWithCode(EXIT_PARSE_ERROR), "");
 }
 
 // parse_plane, missing color
 // expect exit
 TEST(ConfigTest, ParsePlaneMissingColor) {
-	EXPECT_EXIT(parse_plane("pl 0,0,0 0,0,0"), ::testing::ExitedWithCode(EXIT_PARSE_ERROR), "");
+	EXPECT_EXIT(parse_plane("pl 0,1,0 0,0,1"), ::testing::ExitedWithCode(EXIT_PARSE_ERROR), "");
 }
 
 // parse_cylinder
@@ -397,8 +397,11 @@ TEST(ConfigTest, ParseCylinder) {
 // parse_cylinder, missing center
 // expect exit
 TEST(ConfigTest, ParseCylinderMissingCenter) {
-	EXPECT_EXIT(parse_cylinder("cy 0,0,0 0,0,1.0 14.2 21.42 10,0,255"), ::testing::ExitedWithCode(EXIT_PARSE_ERROR),
-				"");
+	EXPECT_EXIT(
+			parse_cylinder("cy 0,0,1.0 14.2 21.42 10,0,255"),
+			::testing::ExitedWithCode(EXIT_PARSE_ERROR),
+			""
+	);
 }
 
 // parse_cylinder, missing diameter

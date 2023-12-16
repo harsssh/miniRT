@@ -13,16 +13,6 @@
 #include "config.h"
 #include "libft.h"
 
-static size_t	array_size(char **array)
-{
-	size_t	size;
-
-	size = 0;
-	while (array[size])
-		size++;
-	return (size);
-}
-
 static size_t count_char(const char *str, char c)
 {
 	size_t	count;
