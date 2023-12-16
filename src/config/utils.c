@@ -49,7 +49,7 @@ void	exit_with_error(int status, const char *message)
 	if (message == NULL)
 		write(STDERR_FILENO, "Error\n", 6);
 	else
-		ft_dprintf(STDERR_FILENO, "Error: %s\n");
+		ft_dprintf(STDERR_FILENO, "Error: %s\n", message);
 	exit(status);
 }
 
