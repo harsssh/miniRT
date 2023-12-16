@@ -90,6 +90,7 @@ bool	is_valid_double(const char *str)
 {
 	bool	dot_found;
 
+	dot_found = false;
 	if (str == NULL || *str == '\0')
 		return (false);
 	if (!(*str == '-' || *str == '.' || ft_isdigit(*str)))
