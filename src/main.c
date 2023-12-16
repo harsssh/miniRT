@@ -10,9 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "debug.h"
 
 int	main(void)
 {
-	printf("miniRT\n");
+	t_parse_option option;
+	option.max_light = 1;
+	t_config *config = parse_config("scenes/example.rt", option);
+	print_config(*config);
 }

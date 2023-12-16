@@ -10,23 +10,26 @@ static void add_light(t_config *config, t_light_conf light)
 	ft_list_push_back(config->lights, light_ptr);
 }
 
-static void *parse_object(const char *line)
+static t_object *parse_object(const char *line)
 {
-	void	*object;
+	t_object *object;
 
-	object = NULL;
+	object = ft_calloc(1, sizeof(t_object));
 	if (ft_strncmp(line, "sp", 2) == 0)
 	{
-		object = ft_calloc(1, sizeof(t_sphere_conf));
-		*(t_sphere_conf *)object = parse_sphere(line);
+		object->type = OBJ_SPHERE;
+		object->object = ft_calloc(1, sizeof(t_sphere_conf));
+		*(t_sphere_conf *)object->object = parse_sphere(line);
 	} else if (ft_strncmp(line, "pl", 2) == 0)
 	{
-		object = ft_calloc(1, sizeof(t_plane_conf));
-		*(t_plane_conf *)object = parse_plane(line);
+		object->type = OBJ_PLANE;
+		object->object = ft_calloc(1, sizeof(t_plane_conf));
+		*(t_plane_conf *)object->object = parse_plane(line);
 	} else if (ft_strncmp(line, "cy", 2) == 0)
 	{
-		object = ft_calloc(1, sizeof(t_cylinder_conf));
-		*(t_cylinder_conf *)object = parse_cylinder(line);
+		object->type = OBJ_CYLINDER;
+		object->object = ft_calloc(1, sizeof(t_cylinder_conf));
+		*(t_cylinder_conf *)object->object = parse_cylinder(line);
 	} else
 		exit_with_error(EXIT_PARSE_ERROR);
 	return (object);
