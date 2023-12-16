@@ -1,0 +1,26 @@
+#include "config.h"
+
+t_config *new_config(void)
+{
+	t_config *config;
+
+	config = ft_calloc(1, sizeof(t_config));
+	config->lights = ft_list_create();
+	config->objects = ft_list_create();
+	return (config);
+}
+
+t_object *new_object(t_object_type type)
+{
+	t_object *object;
+
+	object = ft_calloc(1, sizeof(t_object));
+	object->type = type;
+	if (type == OBJ_SPHERE)
+		object->object = ft_xmalloc(sizeof(t_sphere_conf));
+	else if (type == OBJ_PLANE)
+		object->object = ft_xmalloc(sizeof(t_plane_conf));
+	else if (type == OBJ_CYLINDER)
+		object->object = ft_xmalloc(sizeof(t_cylinder_conf));
+	return (object);
+}

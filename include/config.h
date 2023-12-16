@@ -68,9 +68,9 @@ typedef struct s_cylinder_conf
 
 typedef enum e_object_type
 {
-	SPHERE,
-	PLANE,
-	CYLINDER
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER
 }					t_object_type;
 
 typedef struct s_object
@@ -91,11 +91,11 @@ typedef struct s_config
 
 typedef struct s_parse_option
 {
-	int				max_light;
+	unsigned int	max_light;
 }					t_parse_option;
 
 // exit with error if failed
-t_config			*parse_config(const char *path, t_parse_option option);
+t_config			*parse_config(const char *path, t_parse_option opt);
 
 // internal
 t_ambient_conf		parse_ambient(const char *line);
@@ -117,5 +117,8 @@ char 				**split_space(const char *str);
 void				exit_with_error(int status);
 size_t 				array_size(char **array);
 bool 				is_normalized(t_vec3 vec);
+
+t_config			*new_config(void);
+t_object			*new_object(t_object_type type);
 
 #endif
