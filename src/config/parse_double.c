@@ -119,10 +119,10 @@ double	parse_double(const char *str)
 	double	result;
 
 	if (!is_valid_double(str))
-		exit_with_error(EXIT_PARSE_ERROR);
+		exit_with_error(EXIT_PARSE_ERROR, "parse_double: invalid format");
 	errno = 0;
 	result = ft_atof(str);
 	if (errno != 0)
-		exit_with_error(EXIT_PARSE_ERROR);
+		exit_with_error(EXIT_PARSE_ERROR, "parse_double: invalid value");
 	return (result);
 }

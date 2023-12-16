@@ -1,4 +1,5 @@
 #include "config.h"
+#include "libft.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -31,9 +32,12 @@ size_t	array_size(char **array)
 	return (size);
 }
 
-void	exit_with_error(int status)
+void exit_with_error(int status, const char *message)
 {
-	write(STDERR_FILENO, "Error\n", 6);
+	if (message == NULL)
+		write(STDERR_FILENO, "Error\n", 6);
+	else
+		ft_dprintf(STDERR_FILENO, "Error: %s\n");
 	exit(status);
 }
 

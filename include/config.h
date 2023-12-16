@@ -114,7 +114,7 @@ t_vec3				parse_vec3(const char *str);
 t_rgb				parse_rgb(const char *str);
 
 char 				**split_space(const char *str);
-void				exit_with_error(int status);
+void				exit_with_error(int status, const char *message);
 size_t 				array_size(char **array);
 bool 				is_normalized(t_vec3 vec);
 

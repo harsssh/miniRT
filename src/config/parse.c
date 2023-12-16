@@ -31,7 +31,7 @@ static t_object *parse_object(const char *line)
 		object->object = ft_calloc(1, sizeof(t_cylinder_conf));
 		*(t_cylinder_conf *)object->object = parse_cylinder(line);
 	} else
-		exit_with_error(EXIT_PARSE_ERROR);
+		exit_with_error(EXIT_PARSE_ERROR, "invalid object type");
 	return (object);
 }
 
@@ -46,7 +46,7 @@ static void parse_line(t_config *config, const char *line, t_parse_option opt)
 	else if (ft_strncmp(line, "L", 1) == 0)
 	{
 		if (light_count >= opt.max_light)
-			exit_with_error(EXIT_FAILURE);
+			exit_with_error(EXIT_FAILURE, "too many lights");
 		add_light(config, parse_light(line));
 		++light_count;
 	} else
@@ -61,7 +61,7 @@ t_config	*parse_config(const char *path, t_parse_option opt)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		exit_with_error(EXIT_FAILURE);
+		exit_with_error(EXIT_FAILURE, "failed to open file");
 	config = new_config();
 	while (true)
 	{
