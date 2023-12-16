@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 16:12:43 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/17 07:58:32 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,12 @@ bool				is_normalized(t_vec3 vec);
 
 t_config			*new_config(void);
 t_object			*new_object(t_object_type type);
+
+typedef struct s_parse_state
+{
+	unsigned int	ambient_count;
+	unsigned int	camera_count;
+	unsigned int	light_count;
+}	t_parse_state;
 
 #endif

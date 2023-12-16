@@ -26,7 +26,7 @@ static void	print_lights(t_list *lights, int indent)
 		light = node->data;
 		printf("%*s%d: position=", indent, "", i);
 		print_vec(light->position, false);
-		printf(", ratio=%.1lf, color=", light->brightness);
+		printf(", brightness=%.1lf, color=", light->brightness);
 		print_rgb(light->color, true);
 		++i;
 		node = node->next;

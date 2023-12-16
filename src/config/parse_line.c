@@ -15,20 +15,20 @@
 // A [ratio] [color]
 t_ambient_conf	parse_ambient(const char *line)
 {
-	char			**split;
-	t_ambient_conf	conf;
+	char	**split;
+	double	ratio;
 
 	if (line == NULL || ft_strncmp(line, "A", 1) != 0)
 		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
 	split = split_space(line);
 	if (array_size(split) != 3)
 		exit_with_error(EXIT_PARSE_ERROR, "ambient: invalid format");
-	conf = (t_ambient_conf){
-		.ratio = parse_double(split[1]),
-		.color = parse_rgb(split[2])};
-	if (conf.ratio < 0 || conf.ratio > 1)
+	ratio = parse_double(split[1]);
+	if (ratio < 0 || ratio > 1)
 		exit_with_error(EXIT_FAILURE, "ambient: invalid lightning ratio");
-	return (conf);
+	return ((t_ambient_conf){
+		.ratio = ratio,
+		.color = parse_rgb(split[2])});
 }
 
 // C [position] [orientation] [fov]
@@ -57,14 +57,18 @@ t_camera_conf	parse_camera(const char *line)
 t_light_conf	parse_light(const char *line)
 {
 	char	**split;
+	double	brightness;
 
 	if (line == NULL || ft_strncmp(line, "L", 1) != 0)
 		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
 	split = split_space(line);
 	if (array_size(split) != 4)
 		exit_with_error(EXIT_PARSE_ERROR, "light: invalid format");
+	brightness = parse_double(split[2]);
+	if (brightness < 0 || brightness > 1)
+		exit_with_error(EXIT_FAILURE, "light: invalid brightness");
 	return ((t_light_conf){
 		.position = parse_vec3(split[1]),
-		.brightness = parse_double(split[2]),
+		.brightness = brightness,
 		.color = parse_rgb(split[3])});
 }
