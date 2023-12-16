@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "vector.h"
+# include <stdlib.h>
 
 # define EXIT_PARSE_ERROR 2
 

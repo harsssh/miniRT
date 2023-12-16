@@ -29,7 +29,7 @@ t_camera_conf parse_camera(const char *line) {
 	orient = parse_vec3(split[2]);
 	fov = parse_uint(split[3]);
 	if (!is_normalized(orient) || fov > 180)
-		exit_with_error(EXIT_PARSE_ERROR);
+		exit_with_error(EXIT_FAILURE);
 	return ((t_camera_conf) {
 		.position = parse_vec3(split[1]),
 		.orientation = orient,
@@ -65,7 +65,7 @@ t_plane_conf parse_plane(const char *line) {
 		exit_with_error(EXIT_PARSE_ERROR);
 	normal = parse_vec3(split[2]);
 	if (!is_normalized(normal))
-		exit_with_error(EXIT_PARSE_ERROR);
+		exit_with_error(EXIT_FAILURE);
 	return ((t_plane_conf) {
 		.point = parse_vec3(split[1]),
 		.normal = normal,
@@ -101,7 +101,7 @@ t_cylinder_conf parse_cylinder(const char *line) {
 		exit_with_error(EXIT_PARSE_ERROR);
 	axis = parse_vec3(split[2]);
 	if (!is_normalized(axis))
-		exit_with_error(EXIT_PARSE_ERROR);
+		exit_with_error(EXIT_FAILURE);
 	return ((t_cylinder_conf) {
 		.center = parse_vec3(split[1]),
 		.axis = axis,
