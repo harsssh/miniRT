@@ -5,3 +5,4 @@ miniRT
 *.a
 .idea
 cmake-*
+.DS_Store
