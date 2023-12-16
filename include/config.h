@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 06:43:31 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:10:26 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "vector.h"
 
-#define EXIT_PARSE_ERROR 2
+# define EXIT_PARSE_ERROR 2
 
 // color: [0, 255]
 
