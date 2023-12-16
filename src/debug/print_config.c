@@ -13,7 +13,7 @@ static void print_lights(t_list *lights, int indent)
 		light = node->data;
 		printf("%*s%d: position=", indent, "", i);
 		print_vec(light->position, false);
-		printf(", ratio=%.2lf, color=", light->brightness);
+		printf(", ratio=%.1lf, color=", light->brightness);
 		print_rgb(light->color, true);
 		++i;
 		node = node->next;
@@ -25,7 +25,7 @@ static void print_object(const t_object *obj) {
 	{
 		printf("Sphere: center=");
 		print_vec(((t_sphere_conf *)obj->object)->center, false);
-		printf(", diameter=%.2lf, color=", (((t_sphere_conf *)obj->object))->diameter);
+		printf(", diameter=%.1lf, color=", (((t_sphere_conf *)obj->object))->diameter);
 		print_rgb((((t_sphere_conf *)obj->object))->color, true);
 	} else if (obj->type == OBJ_PLANE)
 	{
@@ -41,7 +41,7 @@ static void print_object(const t_object *obj) {
 		print_vec(((t_cylinder_conf *)(obj->object))->center, false);
 		printf(", axis=");
 		print_vec((((t_cylinder_conf *)obj->object))->axis, false);
-		printf(", diameter=%.2lf, height=%.2lf, color=",
+		printf(", diameter=%.1lf, height=%.1lf, color=",
 			(((t_cylinder_conf *)obj->object))->diameter,
 			(((t_cylinder_conf *)obj->object))->height);
 		print_rgb((((t_cylinder_conf *)obj->object))->color, true);
@@ -65,13 +65,13 @@ static void print_objects(t_list *objects, int indent)
 
 void print_config(t_config config)
 {
-	printf("Ambient: ratio=%.2lf, color=", config.ambient.ratio);
+	printf("Ambient: ratio=%.1lf, color=", config.ambient.ratio);
 	print_rgb(config.ambient.color, true);
 	printf("Camera: position=");
 	print_vec(config.camera.position, false);
 	printf(", orientation=");
 	print_vec(config.camera.orientation, false);
-	printf(", fov=%.2lf\n", config.camera.fov);
+	printf(", fov=%.1lf\n", config.camera.fov);
 	printf("Lights:\n");
 	print_lights(config.lights, 2);
 	printf("Objects:\n");

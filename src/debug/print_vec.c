@@ -2,7 +2,7 @@
 
 void print_vec(t_vec3 vec, bool newline)
 {
-	printf("(%.2lf, %.2lf, %.2lf)", vec.x, vec.y, vec.z);
+	printf("(%.1lf, %.1lf, %.1lf)", vec.x, vec.y, vec.z);
 	if (newline)
 		printf("\n");
 }
