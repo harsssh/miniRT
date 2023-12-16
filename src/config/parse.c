@@ -12,6 +12,7 @@
 
 #include "config.h"
 #include <fcntl.h>
+#include <errno.h>
 
 static void	add_light(t_config *config, t_light_conf light)
 {
@@ -82,7 +83,10 @@ t_config	*parse_config(const char *path, t_parse_option opt)
 	config = new_config();
 	while (true)
 	{
+		errno = 0;
 		line = get_next_line(fd);
+		if (errno != 0)
+			exit_with_error(EXIT_FAILURE, "failed to read file");
 		if (line == NULL)
 			break ;
 		parse_line(config, line, opt);
