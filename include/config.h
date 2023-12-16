@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 10:10:26 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/16 16:12:43 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ t_vec3				parse_vec3(const char *str);
 // "10,0,255" -> t_rgb(10, 0, 255)
 t_rgb				parse_rgb(const char *str);
 
-char 				**split_space(const char *str);
+char				**split_space(const char *str);
 void				exit_with_error(int status, const char *message);
-size_t 				array_size(char **array);
-bool 				is_normalized(t_vec3 vec);
+size_t				array_size(char **array);
+bool				is_normalized(t_vec3 vec);
 
 t_config			*new_config(void);
 t_object			*new_object(t_object_type type);
