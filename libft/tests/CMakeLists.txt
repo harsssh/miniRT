@@ -21,3 +21,6 @@ gtest_discover_tests(test_list)
 
 add_executable(test_basename basename.cpp)
 gtest_discover_tests(test_basename)
+
+add_executable(test_math math.cpp)
+gtest_discover_tests(test_math)
