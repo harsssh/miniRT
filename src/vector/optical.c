@@ -18,5 +18,5 @@ t_vec3	vec3_reflect(t_vec3 v, t_vec3 normal)
 {
 	v = vec3_unit(v);
 	normal = vec3_unit(normal);
-	return (vec3_sub(v, vec3_scale(2 * vec3_dot(v, normal), normal)));
+	return (vec3_sub(v, vec3_scale(normal, 2 * vec3_dot(v, normal))));
 }
