@@ -15,23 +15,28 @@
 // unit vector
 t_vec3	vec3_unit(t_vec3 a)
 {
-	return (vec3_scale(1 / vec3_length(a), a));
+	return (vec3_scale(a, 1 / vec3_length(a)));
 }
 
 // negate
 t_vec3	vec3_negate(t_vec3 a)
 {
-	return (vec3_scale(-1, a));
+	return (vec3_scale(a, -1));
 }
 
 // projection
 t_vec3	vec3_project(t_vec3 v, t_vec3 onto)
 {
-	return (vec3_scale(vec3_dot(v, onto) / vec3_dot(onto, onto), onto));
+	return (vec3_scale(onto, vec3_dot(v, onto) / vec3_dot(onto, onto)));
 }
 
 // addition of 3 vectors
 t_vec3	vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c)
 {
 	return (vec3_add(vec3_add(a, b), c));
+}
+
+t_vec3	vec3_add_scaled(t_vec3 a, t_vec3 b, double t)
+{
+	return (vec3_add(a, vec3_scale(b, t)));
 }

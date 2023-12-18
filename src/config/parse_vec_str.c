@@ -56,7 +56,7 @@ t_rgb	parse_rgb(const char *str)
 	if (split == NULL || array_size(split) != 3)
 		exit_with_error(EXIT_PARSE_ERROR, "parse_rgb: invalid format");
 	v = vec3(parse_uint(split[0]), parse_uint(split[1]), parse_uint(split[2]));
-	if (v.x > 255 || v.y > 255 || v.z > 255)
+	if (rgb_get_r(v) > 255 || rgb_get_g(v) > 255 || rgb_get_b(v) > 255)
 		exit_with_error(EXIT_PARSE_ERROR,
 			"parse_rgb: value out of range (0-255)");
 	free_array(split);

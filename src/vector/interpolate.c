@@ -16,7 +16,7 @@
 // linear interpolation
 t_vec3	vec3_lerp(t_vec3 a, t_vec3 b, double t)
 {
-	return (vec3_add(vec3_scale(1 - t, a), vec3_scale(t, b)));
+	return (vec3_add(vec3_scale(a, 1 - t), vec3_scale(b, t)));
 }
 
 // slerp

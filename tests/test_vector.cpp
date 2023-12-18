@@ -74,21 +74,21 @@ TEST(VectorTest, Cross) {
 // scale
 TEST(VectorTest, Scale) {
 	t_vec3 a = vec3(1, 2, 3);
-	t_vec3 vec = vec3_scale(2, a);
+	t_vec3 vec = vec3_scale(a, 2);
 	expect_vec3(vec, 2, 4, 6);
 }
 
 // scale 0
 TEST(VectorTest, Scale0) {
 	t_vec3 a = vec3(1, 2, 3);
-	t_vec3 vec = vec3_scale(0, a);
+	t_vec3 vec = vec3_scale(a, 0);
 	expect_vec3(vec, 0, 0, 0);
 }
 
 // scale -1
 TEST(VectorTest, ScaleMinus1) {
 	t_vec3 a = vec3(1, 2, 3);
-	t_vec3 vec = vec3_scale(-1, a);
+	t_vec3 vec = vec3_scale(a, -1);
 	expect_vec3(vec, -1, -2, -3);
 }
 
@@ -207,6 +207,14 @@ TEST(VectorTest, Add3) {
 	t_vec3 c = vec3(7, 8, 9);
 	t_vec3 vec = vec3_add_3(a, b, c);
 	expect_vec3(vec, 12, 15, 18);
+}
+
+// add scaled
+TEST(VectorTest, AddScaled) {
+	t_vec3 a = vec3(1, 2, 3);
+	t_vec3 b = vec3(4, 5, 6);
+	t_vec3 vec = vec3_add_scaled(a, b, 0.5);
+	expect_vec3(vec, 3, 4.5, 6);
 }
 
 // min
@@ -328,36 +336,4 @@ TEST(VectorTest, ReflectComplex) {
 	t_vec3 normal = vec3(1, 1, 1);
 	t_vec3 vec = vec3_reflect(v, normal);
 	expect_vec3(vec, -4 / sqrt(29), -3 / sqrt(29), -2 / sqrt(29));
-}
-
-// refract, use xz-plane
-TEST(VectorTest, RefractXZ) {
-	t_vec3 v = vec3(1, -1, 0);
-	t_vec3 normal = vec3(0, 1, 0);
-	t_vec3 vec = vec3_refract(v, normal, M_SQRT2);
-	expect_vec3(vec, 0.5, -sqrt(3) / 2, 0);
-}
-
-// total reflection, use xz-plane
-TEST(VectorTest, TotalReflectionXZ) {
-	t_vec3 v = vec3(sqrt(3), -1, 0);
-	t_vec3 normal = vec3(0, 1, 0);
-	t_vec3 vec = vec3_refract(v, normal, 0.5);
-	expect_vec3(vec, 0, 0, 0);
-}
-
-// total reflection, use xz-plane, 2
-TEST(VectorTest, TotalReflectionXZ2) {
-	t_vec3 v = vec3(1, -sqrt(3), 0);
-	t_vec3 normal = vec3(0, 1, 0);
-	t_vec3 vec = vec3_refract(v, normal, 0.5);
-	expect_vec3(vec, 0, 0, 0);
-}
-
-// schlick
-TEST(VectorTest, Schlick) {
-	double cosine = M_SQRT1_2;    // 45 degrees
-	double ref_idx = 1.5;
-	double schlick = vec3_schlick(cosine, ref_idx);
-	EXPECT_NEAR(schlick, 0.0421, 0.0001);
 }

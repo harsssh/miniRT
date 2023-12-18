@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_vec.c                                        :+:      :+:    :+:   */
+/*   getter_rgb.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:13:55 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 04:17:53 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/19 04:17:30 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/19 04:17:31 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "debug.h"
+#include "vector.h"
 
-void	print_vec(t_vec3 vec, bool newline)
+double	rgb_get_r(t_rgb a)
 {
-	printf("(%.1lf, %.1lf, %.1lf)", vec.x, vec.y, vec.z);
-	if (newline)
-		printf("\n");
+	return (a.x);
 }
 
-void	print_rgb(t_rgb color, bool newline)
+double	rgb_get_g(t_rgb a)
 {
-	printf("(%d, %d, %d)",
-		(int)rgb_get_r(color),
-		(int)rgb_get_g(color),
-		(int)rgb_get_b(color));
-	if (newline)
-		printf("\n");
+	return (a.y);
+}
+
+double	rgb_get_b(t_rgb a)
+{
+	return (a.z);
 }
