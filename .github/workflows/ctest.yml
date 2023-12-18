@@ -20,7 +20,7 @@ on:
       - "CMakeLists.txt"
       - ".github/workflows/**"
 jobs:
-  build:
+  ctest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
