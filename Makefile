@@ -13,10 +13,10 @@ RELEASE_FLAGS := -O3
 # Flags for debug build (no optimizations, with sanitizer)
 DEBUG_FLAGS := -g -O0 -fsanitize=address
 
-INCLUDES := -Iinclude -Isrc -Ilibft/include -Iminilibx
+INCLUDES := -Iinclude -Isrc -Ilibft/include -Iminilibx -I/usr/X11/include
 
-LDFLAGS := -Llibft -Lminilibx
-LDLIBS := -lft -lmlx -lm
+LDFLAGS := -Llibft -Lminilibx -L/usr/X11/lib
+LDLIBS := -lft -lmlx -lm -lX11 -lXext
 
 # Flags to generate dependency files
 DEPFLAGS = -MT $@ -MMD -MP -MF $(BUILD_DIR)/$*.d

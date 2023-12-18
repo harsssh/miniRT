@@ -2,6 +2,7 @@
 -Isrc
 -Ilibft/include
 -Iminilibx
+-I/usr/X11/include
 -Wall
 -Wextra
 -Werror
