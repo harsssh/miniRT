@@ -209,6 +209,14 @@ TEST(VectorTest, Add3) {
 	expect_vec3(vec, 12, 15, 18);
 }
 
+// add scaled
+TEST(VectorTest, AddScaled) {
+	t_vec3 a = vec3(1, 2, 3);
+	t_vec3 b = vec3(4, 5, 6);
+	t_vec3 vec = vec3_add_scaled(a, b, 0.5);
+	expect_vec3(vec, 3, 4.5, 6);
+}
+
 // min
 TEST(VectorTest, Min) {
 	t_vec3 a = vec3(1, -2, 3);

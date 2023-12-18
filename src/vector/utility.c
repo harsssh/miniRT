@@ -35,3 +35,8 @@ t_vec3	vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c)
 {
 	return (vec3_add(vec3_add(a, b), c));
 }
+
+t_vec3	vec3_add_scaled(t_vec3 a, t_vec3 b, double t)
+{
+	return (vec3_add(a, vec3_scale(b, t)));
+}
