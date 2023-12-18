@@ -18,7 +18,7 @@
 
 void	print_config(t_config config);
 void	print_vec(t_vec3 vec, bool newline);
-void	print_rgb(t_rgb rgb, bool newline);
+void	print_rgb(t_rgb color, bool newline);
 void	print_sphere_conf(t_sphere_conf conf);
 void	print_plane_conf(t_plane_conf conf);
 void	print_cylinder_conf(t_cylinder_conf conf);
