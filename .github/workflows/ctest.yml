@@ -1,0 +1,32 @@
+---
+name: CTest
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "libft/**"
+      - "src/**"
+      - "include/**"
+      - "tests/**"
+      - "CMakeLists.txt"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "libft/**"
+      - "src/**"
+      - "include/**"
+      - "tests/**"
+      - "CMakeLists.txt"
+      - ".github/workflows/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install CMake
+        run: sudo apt-get install cmake
+      - name: Build
+        run: cmake -S . -B build && cmake --build build
+      - name: Run CTest
+        run: cmake --build build --target test
