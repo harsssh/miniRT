@@ -71,11 +71,21 @@ typedef struct s_cylinder_conf
 	t_rgb			color;
 }					t_cylinder_conf;
 
+typedef struct	s_cone_conf
+{
+	t_vec3			center;
+	t_vec3			axis;
+	double			diameter;
+	double			height;
+	t_rgb			color;
+}					t_cone_conf;
+
 typedef enum e_object_type
 {
 	OBJ_SPHERE,
 	OBJ_PLANE,
-	OBJ_CYLINDER
+	OBJ_CYLINDER,
+	OBJ_CONE
 }					t_object_type;
 
 typedef struct s_material
@@ -121,6 +131,7 @@ t_light_conf		parse_light(const char *line);
 t_plane_conf		parse_plane(const char *line);
 t_sphere_conf		parse_sphere(const char *line);
 t_cylinder_conf		parse_cylinder(const char *line);
+t_cone_conf			parse_cone(const char *line);
 t_object			*parse_object(const char *line);
 
 // internal utils

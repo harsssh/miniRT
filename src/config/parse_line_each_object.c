@@ -78,3 +78,28 @@ t_cylinder_conf	parse_cylinder(const char *line)
 	free_array(split);
 	return (conf);
 }
+
+// co [center] [axis] [diameter] [height] [color]
+t_cone_conf	parse_cone(const char *line)
+{
+	char		**split;
+	t_vec3		axis;
+	t_cone_conf	conf;
+
+	if (line == NULL || ft_strncmp(line, "co", 2) != 0)
+		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
+	split = split_space(line);
+	if (array_size(split) != 6)
+		exit_with_error(EXIT_PARSE_ERROR, "cone: invalid format");
+	axis = parse_vec3(split[2]);
+	if (!is_normalized(axis))
+		exit_with_error(EXIT_FAILURE, "cone: invalid value");
+	conf = (t_cone_conf){
+		.center = parse_vec3(split[1]),
+		.axis = axis,
+		.diameter = parse_double(split[3]),
+		.height = parse_double(split[4]),
+		.color = parse_rgb(split[5])};
+	free_array(split);
+	return (conf);
+}

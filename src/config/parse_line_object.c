@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 00:19:33 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:19:36 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/19 02:41:44 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,34 @@
 
 #define MATERIAL_DELIM '|'
 
+// set object type and object.object
+static void	init_object(t_object *object, t_object_type type, size_t size)
+{
+	object->type = type;
+	object->object = ft_calloc(1, size);
+}
+
 static void	parse_object_conf(t_object *object, const char *line)
 {
 	if (ft_strncmp(line, "sp", 2) == 0)
 	{
-		object->type = OBJ_SPHERE;
-		object->object = ft_calloc(1, sizeof(t_sphere_conf));
+		init_object(object, OBJ_SPHERE, sizeof(t_sphere_conf));
 		*(t_sphere_conf *)object->object = parse_sphere(line);
 	}
 	else if (ft_strncmp(line, "pl", 2) == 0)
 	{
-		object->type = OBJ_PLANE;
-		object->object = ft_calloc(1, sizeof(t_plane_conf));
+		init_object(object, OBJ_PLANE, sizeof(t_plane_conf));
 		*(t_plane_conf *)object->object = parse_plane(line);
 	}
 	else if (ft_strncmp(line, "cy", 2) == 0)
 	{
-		object->type = OBJ_CYLINDER;
-		object->object = ft_calloc(1, sizeof(t_cylinder_conf));
+		init_object(object, OBJ_CYLINDER, sizeof(t_cylinder_conf));
 		*(t_cylinder_conf *)object->object = parse_cylinder(line);
+	}
+	else if (ft_strncmp(line, "cy", 2) == 0)
+	{
+		init_object(object, OBJ_CONE, sizeof(t_cone_conf));
+		*(t_cone_conf *)object->object = parse_cone(line);
 	}
 	else
 		exit_with_error(EXIT_PARSE_ERROR, "invalid object type");
@@ -65,17 +74,6 @@ static void	parse_material_key_value(t_material *material, const char *str)
 		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid key");
 }
 
-static bool	is_valid_material(t_material material)
-{
-	if (!is_in_range(material.diffuse_reflectance, 0, 1))
-		return (false);
-	if (!is_in_range(material.specular_reflectance, 0, 1))
-		return (false);
-	if (material.shininess < 0)
-		return (false);
-	return (true);
-}
-
 // spec:0.5 diff:0.5 shin:10 check:0,0,0 bump:height_map.png
 static void	parse_material(t_material *material, const char *line)
 {
@@ -89,8 +87,12 @@ static void	parse_material(t_material *material, const char *line)
 		parse_material_key_value(material, *ptr);
 		++ptr;
 	}
-	if (!is_valid_material(*material))
-		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid value");
+	if (!is_in_range(material->diffuse_reflectance, 0, 1))
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid diffuse");
+	if (!is_in_range(material->specular_reflectance, 0, 1))
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid specular");
+	if (material->shininess < 0)
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid shininess");
 	free_array(split);
 }
 
