@@ -25,7 +25,7 @@ t_ambient_conf	parse_ambient(const char *line)
 	if (array_size(split) != 3)
 		exit_with_error(EXIT_PARSE_ERROR, "ambient: invalid format");
 	ratio = parse_double(split[1]);
-	if (ratio < 0 || ratio > 1)
+	if (!is_in_range(ratio, 0, 1))
 		exit_with_error(EXIT_FAILURE, "ambient: invalid lightning ratio");
 	conf = (t_ambient_conf){
 		.ratio = ratio,
@@ -49,7 +49,7 @@ t_camera_conf	parse_camera(const char *line)
 		exit_with_error(EXIT_PARSE_ERROR, "camera: invalid format");
 	orient = parse_vec3(split[2]);
 	fov = parse_uint(split[3]);
-	if (!is_normalized(orient) || fov > 180)
+	if (!is_normalized(orient) || !is_in_range(fov, 0, 180))
 		exit_with_error(EXIT_FAILURE, "camera: invalid value");
 	conf = (t_camera_conf){
 		.position = parse_vec3(split[1]),
@@ -72,7 +72,7 @@ t_light_conf	parse_light(const char *line)
 	if (array_size(split) != 4)
 		exit_with_error(EXIT_PARSE_ERROR, "light: invalid format");
 	brightness = parse_double(split[2]);
-	if (brightness < 0 || brightness > 1)
+	if (!is_in_range(brightness, 0, 1))
 		exit_with_error(EXIT_FAILURE, "light: invalid brightness");
 	conf = (t_light_conf){
 		.position = parse_vec3(split[1]),

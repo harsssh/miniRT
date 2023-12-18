@@ -16,7 +16,6 @@
 t_plane_conf	parse_plane(const char *line)
 {
 	char			**split;
-	t_vec3			normal;
 	t_plane_conf	conf;
 
 	if (line == NULL || ft_strncmp(line, "pl", 2) != 0)
@@ -24,13 +23,12 @@ t_plane_conf	parse_plane(const char *line)
 	split = split_space(line);
 	if (array_size(split) != 4)
 		exit_with_error(EXIT_PARSE_ERROR, "plane: invalid format");
-	normal = parse_vec3(split[2]);
-	if (!is_normalized(normal))
-		exit_with_error(EXIT_FAILURE, "plane: invalid value");
 	conf = (t_plane_conf){
 		.point = parse_vec3(split[1]),
-		.normal = normal,
+		.normal = parse_vec3(split[2]),
 		.color = parse_rgb(split[3])};
+	if (!is_normalized(conf.normal))
+		exit_with_error(EXIT_FAILURE, "plane: invalid value");
 	free_array(split);
 	return (conf);
 }
@@ -50,6 +48,8 @@ t_sphere_conf	parse_sphere(const char *line)
 		.center = parse_vec3(split[1]),
 		.diameter = parse_double(split[2]),
 		.color = parse_rgb(split[3])};
+	if (conf.diameter <= 0)
+		exit_with_error(EXIT_FAILURE, "sphere: invalid value");
 	free_array(split);
 	return (conf);
 }
@@ -58,7 +58,6 @@ t_sphere_conf	parse_sphere(const char *line)
 t_cylinder_conf	parse_cylinder(const char *line)
 {
 	char			**split;
-	t_vec3			axis;
 	t_cylinder_conf	conf;
 
 	if (line == NULL || ft_strncmp(line, "cy", 2) != 0)
@@ -66,15 +65,14 @@ t_cylinder_conf	parse_cylinder(const char *line)
 	split = split_space(line);
 	if (array_size(split) != 6)
 		exit_with_error(EXIT_PARSE_ERROR, "cylinder: invalid format");
-	axis = parse_vec3(split[2]);
-	if (!is_normalized(axis))
-		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
 	conf = (t_cylinder_conf){
 		.center = parse_vec3(split[1]),
-		.axis = axis,
+		.axis = parse_vec3(split[2]),
 		.diameter = parse_double(split[3]),
 		.height = parse_double(split[4]),
 		.color = parse_rgb(split[5])};
+	if (!is_normalized(conf.axis) || conf.diameter <= 0 || conf.height <= 0)
+		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
 	free_array(split);
 	return (conf);
 }
@@ -83,7 +81,6 @@ t_cylinder_conf	parse_cylinder(const char *line)
 t_cone_conf	parse_cone(const char *line)
 {
 	char		**split;
-	t_vec3		axis;
 	t_cone_conf	conf;
 
 	if (line == NULL || ft_strncmp(line, "co", 2) != 0)
@@ -91,15 +88,14 @@ t_cone_conf	parse_cone(const char *line)
 	split = split_space(line);
 	if (array_size(split) != 6)
 		exit_with_error(EXIT_PARSE_ERROR, "cone: invalid format");
-	axis = parse_vec3(split[2]);
-	if (!is_normalized(axis))
-		exit_with_error(EXIT_FAILURE, "cone: invalid value");
 	conf = (t_cone_conf){
 		.center = parse_vec3(split[1]),
-		.axis = axis,
+		.axis = parse_vec3(split[2]),
 		.diameter = parse_double(split[3]),
 		.height = parse_double(split[4]),
 		.color = parse_rgb(split[5])};
+	if (!is_normalized(conf.axis) || conf.diameter <= 0 || conf.height <= 0)
+		exit_with_error(EXIT_FAILURE, "cone: invalid value");
 	free_array(split);
 	return (conf);
 }
