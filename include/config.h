@@ -112,6 +112,7 @@ typedef struct s_parse_option
 
 // exit with error if failed
 t_config			*parse_config(const char *path, t_parse_option opt);
+void				free_config(t_config *config);
 
 // internal
 t_ambient_conf		parse_ambient(const char *line);

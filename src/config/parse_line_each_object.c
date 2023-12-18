@@ -15,8 +15,9 @@
 // pl [point] [normal] [color]
 t_plane_conf	parse_plane(const char *line)
 {
-	char	**split;
-	t_vec3	normal;
+	char			**split;
+	t_vec3			normal;
+	t_plane_conf	conf;
 
 	if (line == NULL || ft_strncmp(line, "pl", 2) != 0)
 		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
@@ -26,33 +27,39 @@ t_plane_conf	parse_plane(const char *line)
 	normal = parse_vec3(split[2]);
 	if (!is_normalized(normal))
 		exit_with_error(EXIT_FAILURE, "plane: invalid value");
-	return ((t_plane_conf){
+	conf = (t_plane_conf){
 		.point = parse_vec3(split[1]),
 		.normal = normal,
-		.color = parse_rgb(split[3])});
+		.color = parse_rgb(split[3])};
+	free_array(split);
+	return (conf);
 }
 
 // sp [center] [diameter] [color]
 t_sphere_conf	parse_sphere(const char *line)
 {
-	char	**split;
+	char			**split;
+	t_sphere_conf	conf;
 
 	if (line == NULL || ft_strncmp(line, "sp", 2) != 0)
 		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
 	split = split_space(line);
 	if (array_size(split) != 4)
 		exit_with_error(EXIT_PARSE_ERROR, "sphere: invalid format");
-	return ((t_sphere_conf){
+	conf = (t_sphere_conf){
 		.center = parse_vec3(split[1]),
 		.diameter = parse_double(split[2]),
-		.color = parse_rgb(split[3])});
+		.color = parse_rgb(split[3])};
+	free_array(split);
+	return (conf);
 }
 
 // cy [center] [axis] [diameter] [height] [color]
 t_cylinder_conf	parse_cylinder(const char *line)
 {
-	char	**split;
-	t_vec3	axis;
+	char			**split;
+	t_vec3			axis;
+	t_cylinder_conf	conf;
 
 	if (line == NULL || ft_strncmp(line, "cy", 2) != 0)
 		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
@@ -62,10 +69,12 @@ t_cylinder_conf	parse_cylinder(const char *line)
 	axis = parse_vec3(split[2]);
 	if (!is_normalized(axis))
 		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
-	return ((t_cylinder_conf){
+	conf = (t_cylinder_conf){
 		.center = parse_vec3(split[1]),
 		.axis = axis,
 		.diameter = parse_double(split[3]),
 		.height = parse_double(split[4]),
-		.color = parse_rgb(split[5])});
+		.color = parse_rgb(split[5])};
+	free_array(split);
+	return (conf);
 }
