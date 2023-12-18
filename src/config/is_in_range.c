@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   is_in_range.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 11:34:06 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:53:01 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/19 00:19:14 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/19 00:19:16 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
-#include "debug.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+bool	is_in_range(double value, double min, double max)
 {
-	t_parse_option	opt;
-	t_config		*config;
+	return (min <= value && value <= max);
+}
 
-	if (argc == 1)
-		return (1);
-	printf("[%s]\n", argv[1]);
-	opt = (t_parse_option){.max_light = 1};
-	config = parse_config(argv[1], opt);
-	print_config(*config);
-	free_config(config);
+bool	is_in_range_uint(unsigned int value, unsigned int min, unsigned int max)
+{
+	return (min <= value && value <= max);
 }

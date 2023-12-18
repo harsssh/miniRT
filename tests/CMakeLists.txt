@@ -7,7 +7,7 @@ include(FetchContent)
 FetchContent_Declare(
         googletest
         GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG        f8d7d77c06936315286eb55f8de22cd23c188571
+        GIT_TAG f8d7d77c06936315286eb55f8de22cd23c188571
 )
 FetchContent_MakeAvailable(googletest)
 include(GoogleTest)
@@ -16,9 +16,19 @@ include(GoogleTest)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/libft/include)
 
+# Add object library
+file(GLOB_RECURSE VECTOR_SOURCES ${CMAKE_SOURCE_DIR}/src/vector/*.c)
+file(GLOB_RECURSE PARSER_SOURCES ${CMAKE_SOURCE_DIR}/src/config/*.c)
+add_library(vec OBJECT ${VECTOR_SOURCES})
+add_library(parser OBJECT ${PARSER_SOURCES})
+
 # Add the tests
 ## Vector
-file(GLOB_RECURSE VECTOR_SOURCES ${CMAKE_SOURCE_DIR}/src/vector/*.c)
-add_executable(test_vector test_vector.cpp ${VECTOR_SOURCES})
+add_executable(test_vector test_vector.cpp $<TARGET_OBJECTS:vec>)
 target_link_libraries(test_vector gtest_main gtest)
 gtest_discover_tests(test_vector)
+
+## Parse config
+add_executable(test_parser test_parser.cpp $<TARGET_OBJECTS:vec> $<TARGET_OBJECTS:parser>)
+target_link_libraries(test_parser gtest_main gtest ft m)
+gtest_discover_tests(test_parser)

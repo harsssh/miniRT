@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 11:34:06 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:53:01 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/16 16:12:17 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/17 07:49:52 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
-#include "debug.h"
-#include <stdio.h>
+#ifndef DEBUG_H
+# define DEBUG_H
 
-int	main(int argc, char **argv)
-{
-	t_parse_option	opt;
-	t_config		*config;
+# include "config.h"
+# include <stdio.h>
 
-	if (argc == 1)
-		return (1);
-	printf("[%s]\n", argv[1]);
-	opt = (t_parse_option){.max_light = 1};
-	config = parse_config(argv[1], opt);
-	print_config(*config);
-	free_config(config);
-}
+void	print_config(t_config config);
+void	print_vec(t_vec3 vec, bool newline);
+void	print_rgb(t_rgb rgb, bool newline);
+void	print_sphere_conf(t_sphere_conf conf);
+void	print_plane_conf(t_plane_conf conf);
+void	print_cylinder_conf(t_cylinder_conf conf);
+void	print_material(t_material mat);
+
+#endif

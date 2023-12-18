@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_vec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 11:34:06 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:53:01 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/16 16:13:55 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/16 16:13:56 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
 #include "debug.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+void	print_vec(t_vec3 vec, bool newline)
 {
-	t_parse_option	opt;
-	t_config		*config;
+	printf("(%.1lf, %.1lf, %.1lf)", vec.x, vec.y, vec.z);
+	if (newline)
+		printf("\n");
+}
 
-	if (argc == 1)
-		return (1);
-	printf("[%s]\n", argv[1]);
-	opt = (t_parse_option){.max_light = 1};
-	config = parse_config(argv[1], opt);
-	print_config(*config);
-	free_config(config);
+void	print_rgb(t_rgb rgb, bool newline)
+{
+	printf("(%d, %d, %d)", (int)rgb.x, (int)rgb.y, (int)rgb.z);
+	if (newline)
+		printf("\n");
 }
