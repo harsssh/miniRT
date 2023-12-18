@@ -17,7 +17,7 @@ add_subdirectory(libft)
 include(ExternalProject)
 ExternalProject_Add(
         minilibx
-        GIT_REPOSITORY git@github.com:42Paris/minilibx-linux.git
+        GIT_REPOSITORY https://github.com/42Paris/minilibx-linux.git
         GIT_TAG master
         PREFIX ${CMAKE_BINARY_DIR}/minilibx
         SOURCE_DIR ${CMAKE_BINARY_DIR}/minilibx/src/minilibx
