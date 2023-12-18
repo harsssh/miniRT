@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   mlx_utils.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 11:34:06 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 06:02:48 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/19 06:02:06 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/19 06:02:09 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
+#ifndef MLX_UTILS_H
+# define MLX_UTILS_H
 
-int	main(int argc, char **argv)
+# include "mlx.h"
+
+typedef struct s_mlx
 {
-	t_mlx	*mlx;
+	void	*mlx;
+	int		width;
+	int		height;
+	void	*img;
+	void	*window;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}			t_mlx;
 
-	(void)argc;
-	(void)argv;
-	mlx = new_mlx(512, 512, "test");
-	render_loop(mlx);
-}
+t_mlx		*new_mlx(int width, int height, char *title);
+void		free_mlx(t_mlx *mlx);
+void		put_pixel_to_image(t_mlx *mlx, int x, int y, int color);
+void		render_loop(t_mlx *mlx);
+
+#endif
