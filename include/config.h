@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:18:52 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/19 02:57:11 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define EXIT_PARSE_ERROR 2
 
+# define DEFAULT_AMBIENT_REFLECTANCE 1.0
 # define DEFAULT_DIFFUSE_REFLECTANCE 0.5
 # define DEFAULT_SPECULAR_REFLECTANCE 0.5
 # define DEFAULT_SHININESS 10
@@ -71,7 +72,7 @@ typedef struct s_cylinder_conf
 	t_rgb			color;
 }					t_cylinder_conf;
 
-typedef struct	s_cone_conf
+typedef struct s_cone_conf
 {
 	t_vec3			center;
 	t_vec3			axis;
@@ -92,6 +93,7 @@ typedef struct s_material
 {
 	double			diffuse_reflectance;
 	double			specular_reflectance;
+	double			ambient_reflectance;
 	double			shininess;
 	bool			checker;
 	t_rgb			check_color;

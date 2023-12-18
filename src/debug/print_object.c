@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:27:24 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:20:21 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/19 02:54:20 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,10 @@ void	print_cylinder_conf(t_cylinder_conf conf)
 
 void	print_material(t_material mat)
 {
-	printf("Material: diffuse=%.1lf, specular=%.1lf, shininess=%.1lf",
+	printf("Material: diffuse=%.1lf, specular=%.1lf, "
+		"ambient=%.1lf, shininess=%.1lf",
 		mat.diffuse_reflectance, mat.specular_reflectance,
-		mat.shininess);
+		mat.ambient_reflectance, mat.shininess);
 	if (mat.height_map)
 		printf(", height_map=%s", mat.height_map);
 	if (mat.checker)

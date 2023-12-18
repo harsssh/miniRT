@@ -61,6 +61,8 @@ static void	parse_material_key_value(t_material *material, const char *str)
 		material->diffuse_reflectance = parse_double(delim_pos + 1);
 	else if (ft_strncmp(str, "spec", key_len) == 0)
 		material->specular_reflectance = parse_double(delim_pos + 1);
+	else if (ft_strncmp(str, "amb", key_len) == 0)
+		material->ambient_reflectance = parse_double(delim_pos + 1);
 	else if (ft_strncmp(str, "shin", key_len) == 0)
 		material->shininess = parse_double(delim_pos + 1);
 	else if (ft_strncmp(str, "check", key_len) == 0)
@@ -91,6 +93,8 @@ static void	parse_material(t_material *material, const char *line)
 		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid diffuse");
 	if (!is_in_range(material->specular_reflectance, 0, 1))
 		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid specular");
+	if (!is_in_range(material->ambient_reflectance, 0, 1))
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid ambient");
 	if (material->shininess < 0)
 		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid shininess");
 	free_array(split);
@@ -105,6 +109,7 @@ t_object	*parse_object(const char *line)
 	object = ft_calloc(1, sizeof(t_object));
 	object->material.diffuse_reflectance = DEFAULT_DIFFUSE_REFLECTANCE;
 	object->material.specular_reflectance = DEFAULT_SPECULAR_REFLECTANCE;
+	object->material.ambient_reflectance = DEFAULT_AMBIENT_REFLECTANCE;
 	object->material.shininess = DEFAULT_SHININESS;
 	line_copy = ft_strdup(line);
 	delim_pos = ft_strchr(line_copy, MATERIAL_DELIM);
