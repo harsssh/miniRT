@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:36:26 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 21:36:27 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/19 00:19:24 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,19 @@ bool	is_normalized(t_vec3 vec)
 
 	len2 = vec3_length_squared(vec);
 	return (fabs(len2 - 1.0) < 1e-6);
+}
+
+void	free_array(char **array)
+{
+	char	**ptr;
+
+	if (array == NULL)
+		return ;
+	ptr = array;
+	while (*ptr)
+	{
+		free(*ptr);
+		++ptr;
+	}
+	free(array);
 }

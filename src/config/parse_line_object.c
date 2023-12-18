@@ -5,67 +5,113 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 21:39:09 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/16 21:39:11 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/19 00:19:33 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/19 00:19:36 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "config.h"
 
-// pl [point] [normal] [color]
-t_plane_conf	parse_plane(const char *line)
-{
-	char	**split;
-	t_vec3	normal;
+#define MATERIAL_DELIM '|'
 
-	if (line == NULL || ft_strncmp(line, "pl", 2) != 0)
-		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
-	split = split_space(line);
-	if (array_size(split) != 4)
-		exit_with_error(EXIT_PARSE_ERROR, "plane: invalid format");
-	normal = parse_vec3(split[2]);
-	if (!is_normalized(normal))
-		exit_with_error(EXIT_FAILURE, "plane: invalid value");
-	return ((t_plane_conf){
-		.point = parse_vec3(split[1]),
-		.normal = normal,
-		.color = parse_rgb(split[3])});
+static void	parse_object_conf(t_object *object, const char *line)
+{
+	if (ft_strncmp(line, "sp", 2) == 0)
+	{
+		object->type = OBJ_SPHERE;
+		object->object = ft_calloc(1, sizeof(t_sphere_conf));
+		*(t_sphere_conf *)object->object = parse_sphere(line);
+	}
+	else if (ft_strncmp(line, "pl", 2) == 0)
+	{
+		object->type = OBJ_PLANE;
+		object->object = ft_calloc(1, sizeof(t_plane_conf));
+		*(t_plane_conf *)object->object = parse_plane(line);
+	}
+	else if (ft_strncmp(line, "cy", 2) == 0)
+	{
+		object->type = OBJ_CYLINDER;
+		object->object = ft_calloc(1, sizeof(t_cylinder_conf));
+		*(t_cylinder_conf *)object->object = parse_cylinder(line);
+	}
+	else
+		exit_with_error(EXIT_PARSE_ERROR, "invalid object type");
 }
 
-// sp [center] [diameter] [color]
-t_sphere_conf	parse_sphere(const char *line)
+// key:value
+static void	parse_material_key_value(t_material *material, const char *str)
 {
-	char	**split;
+	char	*delim_pos;
+	size_t	key_len;
 
-	if (line == NULL || ft_strncmp(line, "sp", 2) != 0)
-		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
-	split = split_space(line);
-	if (array_size(split) != 4)
-		exit_with_error(EXIT_PARSE_ERROR, "sphere: invalid format");
-	return ((t_sphere_conf){
-		.center = parse_vec3(split[1]),
-		.diameter = parse_double(split[2]),
-		.color = parse_rgb(split[3])});
+	delim_pos = ft_strchr(str, ':');
+	if (delim_pos == NULL)
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid format");
+	key_len = delim_pos - str;
+	if (ft_strncmp(str, "diff", key_len) == 0)
+		material->diffuse_reflectance = parse_double(delim_pos + 1);
+	else if (ft_strncmp(str, "spec", key_len) == 0)
+		material->specular_reflectance = parse_double(delim_pos + 1);
+	else if (ft_strncmp(str, "shin", key_len) == 0)
+		material->shininess = parse_double(delim_pos + 1);
+	else if (ft_strncmp(str, "check", key_len) == 0)
+	{
+		material->checker = true;
+		material->check_color = parse_rgb(delim_pos + 1);
+	}
+	else if (ft_strncmp(str, "bump", key_len) == 0)
+		material->height_map = ft_strdup(delim_pos + 1);
+	else
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid key");
 }
 
-// cy [center] [axis] [diameter] [height] [color]
-t_cylinder_conf	parse_cylinder(const char *line)
+static bool	is_valid_material(t_material material)
+{
+	if (!is_in_range(material.diffuse_reflectance, 0, 1))
+		return (false);
+	if (!is_in_range(material.specular_reflectance, 0, 1))
+		return (false);
+	if (material.shininess < 0)
+		return (false);
+	return (true);
+}
+
+// spec:0.5 diff:0.5 shin:10 check:0,0,0 bump:height_map.png
+static void	parse_material(t_material *material, const char *line)
 {
 	char	**split;
-	t_vec3	axis;
+	char	**ptr;
 
-	if (line == NULL || ft_strncmp(line, "cy", 2) != 0)
-		exit_with_error(EXIT_PARSE_ERROR, "invalid type");
 	split = split_space(line);
-	if (array_size(split) != 6)
-		exit_with_error(EXIT_PARSE_ERROR, "cylinder: invalid format");
-	axis = parse_vec3(split[2]);
-	if (!is_normalized(axis))
-		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
-	return ((t_cylinder_conf){
-		.center = parse_vec3(split[1]),
-		.axis = axis,
-		.diameter = parse_double(split[3]),
-		.height = parse_double(split[4]),
-		.color = parse_rgb(split[5])});
+	ptr = split;
+	while (*ptr)
+	{
+		parse_material_key_value(material, *ptr);
+		++ptr;
+	}
+	if (!is_valid_material(*material))
+		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid value");
+	free_array(split);
+}
+
+t_object	*parse_object(const char *line)
+{
+	t_object	*object;
+	char		*line_copy;
+	char		*delim_pos;
+
+	object = ft_calloc(1, sizeof(t_object));
+	object->material.diffuse_reflectance = DEFAULT_DIFFUSE_REFLECTANCE;
+	object->material.specular_reflectance = DEFAULT_SPECULAR_REFLECTANCE;
+	object->material.shininess = DEFAULT_SHININESS;
+	line_copy = ft_strdup(line);
+	delim_pos = ft_strchr(line_copy, MATERIAL_DELIM);
+	if (delim_pos != NULL)
+	{
+		*delim_pos = '\0';
+		parse_material(&object->material, delim_pos + 1);
+	}
+	parse_object_conf(object, line_copy);
+	free(line_copy);
+	return (object);
 }

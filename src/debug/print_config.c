@@ -49,6 +49,8 @@ static void	print_objects(t_list *objects, int indent)
 			print_sphere_conf(*(t_sphere_conf *)obj->object);
 		else if (obj->type == OBJ_CYLINDER)
 			print_cylinder_conf(*(t_cylinder_conf *)obj->object);
+		printf("%*s", indent + 2, "");
+		print_material(obj->material);
 		node = node->next;
 	}
 }
