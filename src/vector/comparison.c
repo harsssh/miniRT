@@ -12,13 +12,10 @@
 
 #include "vector.h"
 
-#define EPSILON 1e-6
-
 // equality
 bool	vec3_equal(t_vec3 a, t_vec3 b)
 {
-	return (fabs(a.x - b.x) < EPSILON && fabs(a.y - b.y) < EPSILON
-		&& fabs(a.z - b.z) < EPSILON);
+	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }
 
 // inequality
