@@ -13,8 +13,16 @@
 #include "config.h"
 #include "libft.h"
 #include <errno.h>
-#include <float.h>
 #include <stdbool.h>
+
+/* Due to a bug in norminette, we cannot include float.h.
+   Therefore, we need to manually define the necessary constants. */
+#ifndef DBL_MAX
+# define DBL_MAX __DBL_MAX__
+#endif
+#ifndef DBL_MIN
+# define DBL_MIN __DBL_MIN__
+#endif
 
 // str starts with 0-9 or '.'
 static const char	*atof_integer_part(const char *str, double *result)
