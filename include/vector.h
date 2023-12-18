@@ -69,8 +69,5 @@ t_vec3		vec3_lerp(t_vec3 a, t_vec3 b, double t);
 t_vec3		vec3_slerp(t_vec3 a, t_vec3 b, double t);
 
 t_vec3		vec3_reflect(t_vec3 v, t_vec3 normal);
-bool		vec3_is_total_reflection(t_vec3 v, t_vec3 normal, double ref_idx);
-t_vec3		vec3_refract(t_vec3 v, t_vec3 normal, double ref_idx);
-double		vec3_schlick(double cosine, double ref_idx);
 
 #endif
