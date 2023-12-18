@@ -30,5 +30,5 @@ gtest_discover_tests(test_vector)
 
 ## Parse config
 add_executable(test_parser test_parser.cpp $<TARGET_OBJECTS:vec> $<TARGET_OBJECTS:parser>)
-target_link_libraries(test_parser gtest_main gtest ft)
+target_link_libraries(test_parser gtest_main gtest ft m)
 gtest_discover_tests(test_parser)
