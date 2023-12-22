@@ -65,7 +65,7 @@ bool			vec3_equal(t_vec3 a, t_vec3 b);
 bool			vec3_not_equal(t_vec3 a, t_vec3 b);
 
 // utility
-t_vec3			vec3_unit(t_vec3 a);
+t_vec3			vec3_normalize(t_vec3 a);
 t_vec3			vec3_negate(t_vec3 a);
 t_vec3			vec3_project(t_vec3 v, t_vec3 onto);
 t_vec3			vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c);

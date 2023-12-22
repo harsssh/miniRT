@@ -181,7 +181,7 @@ TEST(VectorTest, NotEqual) {
 // unit
 TEST(VectorTest, Unit) {
 	t_vec3 a = vec3(1, 1, 1);
-	t_vec3 vec = vec3_unit(a);
+	t_vec3 vec = vec3_normalize(a);
 	expect_vec3(vec, 1 / sqrt(3), 1 / sqrt(3), 1 / sqrt(3));
 }
 
