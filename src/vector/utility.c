@@ -13,7 +13,7 @@
 #include "vector.h"
 
 // unit vector
-t_vec3	vec3_unit(t_vec3 a)
+t_vec3	vec3_normalize(t_vec3 a)
 {
 	return (vec3_scale(a, 1 / vec3_length(a)));
 }

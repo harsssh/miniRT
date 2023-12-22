@@ -16,7 +16,7 @@
 // calculate the direction of the reflected ray
 t_vec3	vec3_reflect(t_vec3 v, t_vec3 normal)
 {
-	v = vec3_unit(v);
-	normal = vec3_unit(normal);
+	v = vec3_normalize(v);
+	normal = vec3_normalize(normal);
 	return (vec3_sub(v, vec3_scale(normal, 2 * vec3_dot(v, normal))));
 }

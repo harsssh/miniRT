@@ -20,7 +20,7 @@ t_vec3	vec3_rotate(t_vec3 a, t_radian angle, t_vec3 axis)
 	t_vec3	comp1;
 	t_vec3	comp2;
 
-	unit_axis = vec3_unit(axis);
+	unit_axis = vec3_normalize(axis);
 	comp1 = vec3_cross(unit_axis, a);
 	comp2 = vec3_cross(unit_axis, comp1);
 	return (vec3_add_3(
