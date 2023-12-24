@@ -6,24 +6,24 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 11:34:06 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 06:02:48 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/25 04:55:37 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx_utils.h"
 #include "tracer.h"
-#include <stdio.h>
 #include <limits.h>
+#include <stdio.h>
 
-# define WIDTH 1024
-# define HEIGHT 768
-# define TITLE "miniRT"
+#define WIDTH 1024
+#define HEIGHT 768
+#define TITLE "miniRT"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	const t_parse_option opt = {.max_light = UINT_MAX};
-	t_scene *scene;
-	t_mlx *mlx;
+	const t_parse_option	opt = {.max_light = UINT_MAX};
+	t_scene					*scene;
+	t_mlx					*mlx;
 
 	if (argc != 2)
 	{

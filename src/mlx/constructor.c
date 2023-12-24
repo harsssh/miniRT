@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 06:02:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 06:02:19 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/25 04:36:53 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ static int	terminate(void)
 	exit(EXIT_SUCCESS);
 }
 
-static int key_handler(int key, void *param)
+static int	key_handler(int key, void *param)
 {
 	(void)param;
-
 	if (key == ESCAPE_KEY)
 		terminate();
 	return (0);
