@@ -71,9 +71,9 @@ t_vec3			vec3_project(t_vec3 v, t_vec3 onto);
 t_vec3			vec3_add_3(t_vec3 a, t_vec3 b, t_vec3 c);
 t_vec3			vec3_add_scaled(t_vec3 a, t_vec3 b, double t);
 
-t_vec3			vec3_min(t_vec3 a, t_vec3 b);
-t_vec3			vec3_max(t_vec3 a, t_vec3 b);
-t_vec3			vec3_clamp(t_vec3 a, t_vec3 min, t_vec3 max);
+t_vec3			vec3_min(t_vec3 a, double lower);
+t_vec3			vec3_max(t_vec3 a, double upper);
+t_vec3			vec3_clamp(t_vec3 a, double lower, double upper);
 
 t_vec3			vec3_lerp(t_vec3 a, t_vec3 b, double t);
 t_vec3			vec3_slerp(t_vec3 a, t_vec3 b, double t);
@@ -83,5 +83,6 @@ t_vec3			vec3_reflect(t_vec3 v, t_vec3 normal);
 // color
 int				rgb_to_int(t_rgb c);
 int				rgb_to_int_255(t_rgb c);
+t_rgb			rgb_normalize(t_rgb c);
 
 #endif

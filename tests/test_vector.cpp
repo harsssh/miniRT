@@ -220,26 +220,22 @@ TEST(VectorTest, AddScaled) {
 // min
 TEST(VectorTest, Min) {
 	t_vec3 a = vec3(1, -2, 3);
-	t_vec3 b = vec3(-4, 5, -6);
-	t_vec3 vec = vec3_min(a, b);
-	expect_vec3(vec, -4, -2, -6);
+	t_vec3 vec = vec3_min(a, 0);
+	expect_vec3(vec, 0, -2, 0);
 }
 
 // max
 TEST(VectorTest, Max) {
 	t_vec3 a = vec3(1, -2, 3);
-	t_vec3 b = vec3(-4, 5, -6);
-	t_vec3 vec = vec3_max(a, b);
-	expect_vec3(vec, 1, 5, 3);
+	t_vec3 vec = vec3_max(a, 0);
+	expect_vec3(vec, 1, 0, 3);
 }
 
 // clamp
 TEST(VectorTest, Clamp) {
 	t_vec3 a = vec3(1, -2, 3);
-	t_vec3 min = vec3(-1, -1, -1);
-	t_vec3 max = vec3(1, 1, 1);
-	t_vec3 vec = vec3_clamp(a, min, max);
-	expect_vec3(vec, 1, -1, 1);
+	t_vec3 vec = vec3_clamp(a, 0, 2);
+	expect_vec3(vec, 1, 0, 2);
 }
 
 // lerp

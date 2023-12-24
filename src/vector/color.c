@@ -14,17 +14,24 @@
 
 int	rgb_to_int(t_rgb c)
 {
-	c = vec3_scale(c, 255);
+	c = vec3_clamp(vec3_scale(c, 255), 0, 255);
 	return (rgb_to_int_255(c));
 }
 
 int	rgb_to_int_255(t_rgb c)
 {
-	int	result;
+	int r;
+	int g;
+	int b;
 
-	result = 0;
-	result |= ((int)(c.x) & 0xff) << 16;
-	result |= ((int)(c.y) & 0xff) << 8;
-	result |= ((int)(c.z) & 0xff);
-	return (result);
+	c = vec3_clamp(c, 0, 255);
+	r = (int)rgb_get_r(c);
+	g = (int)rgb_get_g(c);
+	b = (int)rgb_get_b(c);
+	return (r << 16 | g << 8 | b);
+}
+
+t_rgb	rgb_normalize(t_rgb c)
+{
+	return (vec3_scale(vec3_clamp(c, 0, 255), 1.0 / 255));
 }
