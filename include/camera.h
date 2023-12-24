@@ -13,7 +13,7 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-# include "parser.h"
+# include "scene.h"
 # include "ray.h"
 # include "vector.h"
 

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-#include "parser.h"
+#include "scene.h"
 }
 
 void expect_vec3(t_vec3 vec, double x, double y, double z) {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "scene.h"
 #include "debug.h"
 
 static void	print_lights(t_list *lights, int indent)

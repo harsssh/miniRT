@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "scene.h"
 
 // A [ratio] [color]
 t_ambient_conf	parse_ambient(const char *line)

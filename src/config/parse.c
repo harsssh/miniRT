@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "scene.h"
 #include <errno.h>
 #include <fcntl.h>
 

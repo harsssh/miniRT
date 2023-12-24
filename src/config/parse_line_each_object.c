@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "scene.h"
 
 // pl [point] [normal] [color]
 t_plane_conf	parse_plane(const char *line)

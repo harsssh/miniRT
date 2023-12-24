@@ -13,7 +13,7 @@
 #ifndef DEBUG_H
 # define DEBUG_H
 
-# include "parser.h"
+# include "scene.h"
 # include <stdio.h>
 
 void	print_config(t_scene config);
