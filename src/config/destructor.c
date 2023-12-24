@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "parser.h"
 
 void	free_object(void *data)
 {
@@ -21,7 +21,7 @@ void	free_object(void *data)
 	free(obj);
 }
 
-void	free_config(t_config *config)
+void	free_config(t_scene *config)
 {
 	ft_list_destroy(config->lights, free);
 	ft_list_destroy(config->objects, free_object);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "parser.h"
 
 bool	is_in_range(double value, double min, double max)
 {

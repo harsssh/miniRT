@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "parser.h"
 
-t_config	*new_config(void)
+t_scene	*new_scene(void)
 {
-	t_config	*config;
+	t_scene	*config;
 
-	config = ft_calloc(1, sizeof(t_config));
+	config = ft_calloc(1, sizeof(t_scene));
 	config->lights = ft_list_create();
 	config->objects = ft_list_create();
 	return (config);

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-#include "config.h"
+#include "parser.h"
 }
 
 void expect_vec3(t_vec3 vec, double x, double y, double z) {

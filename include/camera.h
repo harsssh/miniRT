@@ -2,7 +2,7 @@
 #define CAMERA_H
 
 #include "vector.h"
-#include "config.h"
+#include "parser.h"
 #include "ray.h"
 
 /*
