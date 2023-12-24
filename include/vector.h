@@ -80,4 +80,8 @@ t_vec3			vec3_slerp(t_vec3 a, t_vec3 b, double t);
 
 t_vec3			vec3_reflect(t_vec3 v, t_vec3 normal);
 
+// color
+int				rgb_to_int(t_rgb c);
+int				rgb_to_int_255(t_rgb c);
+
 #endif
