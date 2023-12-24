@@ -18,9 +18,9 @@ include_directories(${CMAKE_SOURCE_DIR}/libft/include)
 
 # Add object library
 file(GLOB_RECURSE VECTOR_SOURCES ${CMAKE_SOURCE_DIR}/src/vector/*.c)
-file(GLOB_RECURSE PARSER_SOURCES ${CMAKE_SOURCE_DIR}/src/config/*.c)
+file(GLOB_RECURSE SCENE_SOURCES ${CMAKE_SOURCE_DIR}/src/scene/*.c)
 add_library(vec OBJECT ${VECTOR_SOURCES})
-add_library(parser OBJECT ${PARSER_SOURCES})
+add_library(scene OBJECT ${SCENE_SOURCES})
 
 # Add the tests
 ## Vector
@@ -28,7 +28,7 @@ add_executable(test_vector test_vector.cpp $<TARGET_OBJECTS:vec>)
 target_link_libraries(test_vector gtest_main gtest)
 gtest_discover_tests(test_vector)
 
-## Parse config
-add_executable(test_parser test_parser.cpp $<TARGET_OBJECTS:vec> $<TARGET_OBJECTS:parser>)
+## Scene
+add_executable(test_parser test_parser.cpp $<TARGET_OBJECTS:vec> $<TARGET_OBJECTS:scene>)
 target_link_libraries(test_parser gtest_main gtest ft m)
 gtest_discover_tests(test_parser)
