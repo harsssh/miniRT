@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 04:37:16 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/25 04:37:18 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/25 06:56:32 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	rgb_to_int(t_rgb c)
 
 int	rgb_to_int_255(t_rgb c)
 {
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 
 	c = vec3_clamp(c, 0, 255);
 	r = (int)rgb_get_r(c);
