@@ -29,7 +29,7 @@ t_ambient_conf	parse_ambient(const char *line)
 		exit_with_error(EXIT_FAILURE, "ambient: invalid lightning ratio");
 	conf = (t_ambient_conf){
 		.ratio = ratio,
-		.color = parse_rgb(split[2])};
+		.color = rgb_normalize(parse_rgb(split[2]))};
 	free_array(split);
 	return (conf);
 }
@@ -77,7 +77,7 @@ t_light_conf	parse_light(const char *line)
 	conf = (t_light_conf){
 		.position = parse_vec3(split[1]),
 		.brightness = brightness,
-		.color = parse_rgb(split[3])};
+		.color = rgb_normalize(parse_rgb(split[3]))};
 	free_array(split);
 	return (conf);
 }
