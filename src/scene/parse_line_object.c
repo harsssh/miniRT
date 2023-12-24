@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "scene.h"
 
 #define MATERIAL_DELIM '|'
 
@@ -68,7 +68,7 @@ static void	parse_material_key_value(t_material *material, const char *str)
 	else if (ft_strncmp(str, "check", key_len) == 0)
 	{
 		material->checker = true;
-		material->check_color = parse_rgb(delim_pos + 1);
+		material->check_color = rgb_normalize(parse_rgb(delim_pos + 1));
 	}
 	else if (ft_strncmp(str, "bump", key_len) == 0)
 		material->height_map = ft_strdup(delim_pos + 1);

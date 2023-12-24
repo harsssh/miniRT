@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:12:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/17 07:49:52 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/25 04:37:16 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/25 06:56:32 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "vector.h"
 
-# include "scene.h"
-# include <stdio.h>
+int	rgb_to_int(t_rgb c)
+{
+	c = vec3_clamp(vec3_scale(c, 255), 0, 255);
+	return (rgb_to_int_255(c));
+}
 
-void	print_config(t_scene config);
-void	print_vec(t_vec3 vec, bool newline);
-void	print_rgb(t_rgb color, bool newline);
-void	print_sphere_conf(t_sphere_conf conf);
-void	print_plane_conf(t_plane_conf conf);
-void	print_cylinder_conf(t_cylinder_conf conf);
-void	print_material(t_material mat);
+int	rgb_to_int_255(t_rgb c)
+{
+	int	r;
+	int	g;
+	int	b;
 
-#endif
+	c = vec3_clamp(c, 0, 255);
+	r = (int)rgb_get_r(c);
+	g = (int)rgb_get_g(c);
+	b = (int)rgb_get_b(c);
+	return (r << 16 | g << 8 | b);
+}
+
+t_rgb	rgb_normalize(t_rgb c)
+{
+	return (vec3_scale(vec3_clamp(c, 0, 255), 1.0 / 255));
+}

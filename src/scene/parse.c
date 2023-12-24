@@ -6,15 +6,15 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:37:45 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/17 08:07:47 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/25 04:52:22 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "scene.h"
 #include <errno.h>
 #include <fcntl.h>
 
-static void	add_light(t_config *config, t_light_conf light)
+static void	add_light(t_scene *config, t_light_conf light)
 {
 	t_light_conf	*light_ptr;
 
@@ -23,7 +23,7 @@ static void	add_light(t_config *config, t_light_conf light)
 	ft_list_push_back(config->lights, light_ptr);
 }
 
-static void	parse_line(t_config *config, const char *line, t_parse_state *state)
+static void	parse_line(t_scene *config, const char *line, t_parse_state *state)
 {
 	if (ft_strncmp(line, "A", 1) == 0)
 	{
@@ -54,18 +54,18 @@ static void	validate_state(t_parse_state state, t_parse_option opt)
 		exit_with_error(EXIT_PARSE_ERROR, "light: too many");
 }
 
-t_config	*parse_config(const char *path, t_parse_option opt)
+t_scene	*parse_scene(const char *path, t_parse_option opt)
 {
 	int				fd;
 	char			*line;
-	t_config		*config;
+	t_scene			*scene;
 	t_parse_state	state;
 
 	ft_bzero(&state, sizeof(t_parse_state));
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		exit_with_error(EXIT_FAILURE, "failed to open file");
-	config = new_config();
+	scene = new_scene();
 	while (true)
 	{
 		errno = 0;
@@ -74,9 +74,9 @@ t_config	*parse_config(const char *path, t_parse_option opt)
 			exit_with_error(EXIT_FAILURE, "failed to read file");
 		if (line == NULL)
 			break ;
-		parse_line(config, line, &state);
+		parse_line(scene, line, &state);
 		free(line);
 	}
 	validate_state(state, opt);
-	return (config);
+	return (scene);
 }

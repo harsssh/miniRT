@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "scene.h"
 #include "libft.h"
 #include <stdlib.h>
 #include <unistd.h>

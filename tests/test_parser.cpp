@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-#include "config.h"
+#include "scene.h"
 }
 
 void expect_vec3(t_vec3 vec, double x, double y, double z) {
@@ -268,11 +268,12 @@ TEST(ConfigTest, ParseRgbMissingValue) {
 }
 
 // parse_ambient, normal
+// color is normalized
 TEST(ConfigTest, ParseAmbient) {
 	auto line = "A  0.2  255,255,255";
 	auto ambient = parse_ambient(line);
 	EXPECT_DOUBLE_EQ(ambient.ratio, 0.2);
-	expect_vec3(ambient.color, 255, 255, 255);
+	expect_vec3(ambient.color, 1, 1, 1);
 }
 
 // parse_ambient, missing ratio
@@ -314,7 +315,7 @@ TEST(ConfigTest, ParseLight) {
 	auto light = parse_light(line);
 	expect_vec3(light.position, -40, 0, 30);
 	EXPECT_DOUBLE_EQ(light.brightness, 0.7);
-	expect_vec3(light.color, 255, 255, 255);
+	expect_vec3(light.color, 1, 1, 1);
 }
 
 // parse_light, missing position
@@ -341,7 +342,7 @@ TEST(ConfigTest, ParseSphere) {
 	auto sphere = parse_sphere(line);
 	expect_vec3(sphere.center, -30, 0, 40);
 	EXPECT_DOUBLE_EQ(sphere.diameter, 20);
-	expect_vec3(sphere.color, 255, 255, 255);
+	expect_vec3(sphere.color, 1, 1, 1);
 }
 
 // parse_sphere, missing center
@@ -368,7 +369,7 @@ TEST(ConfigTest, ParsePlane) {
 	auto plane = parse_plane(line);
 	expect_vec3(plane.point, 0, 1, 0);
 	expect_vec3(plane.normal, 0, 0, 1);
-	expect_vec3(plane.color, 255, 255, 255);
+	expect_vec3(plane.color, 1, 1, 1);
 }
 
 // parse_plane, missing point
@@ -391,7 +392,7 @@ TEST(ConfigTest, ParseCylinder) {
 	expect_vec3(cylinder.axis, 0, 0, 1.0);
 	EXPECT_DOUBLE_EQ(cylinder.diameter, 14.2);
 	EXPECT_DOUBLE_EQ(cylinder.height, 21.42);
-	expect_vec3(cylinder.color, 10, 0, 255);
+	expect_vec3(cylinder.color, 10.0/255, 0, 1);
 }
 
 // parse_cylinder, missing center

@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   destructor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:12:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/17 07:49:52 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/19 00:47:09 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/19 00:53:05 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "scene.h"
 
-# include "scene.h"
-# include <stdio.h>
+void	free_object(void *data)
+{
+	t_object	*obj;
 
-void	print_config(t_scene config);
-void	print_vec(t_vec3 vec, bool newline);
-void	print_rgb(t_rgb color, bool newline);
-void	print_sphere_conf(t_sphere_conf conf);
-void	print_plane_conf(t_plane_conf conf);
-void	print_cylinder_conf(t_cylinder_conf conf);
-void	print_material(t_material mat);
+	obj = data;
+	free(obj->object);
+	free(obj);
+}
 
-#endif
+void	free_config(t_scene *config)
+{
+	ft_list_destroy(config->lights, free);
+	ft_list_destroy(config->objects, free_object);
+	free(config);
+}

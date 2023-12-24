@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_in_range.c                                      :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 00:19:14 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:19:16 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/25 04:36:14 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/25 04:36:16 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#ifndef RAY_H
+# define RAY_H
 
-bool	is_in_range(double value, double min, double max)
-{
-	return (min <= value && value <= max);
-}
+# include "vector.h"
 
-bool	is_in_range_uint(unsigned int value, unsigned int min, unsigned int max)
+typedef struct s_ray
 {
-	return (min <= value && value <= max);
-}
+	t_vec3	origin;
+	t_vec3	direction;
+}			t_ray;
+
+t_ray		new_ray(t_vec3 origin, t_vec3 direction);
+t_vec3		ray_at(t_ray ray, double t);
+
+#endif

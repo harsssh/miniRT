@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "scene.h"
 #include "libft.h"
 #include <errno.h>
 #include <stdbool.h>

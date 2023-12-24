@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "scene.h"
 
 // pl [point] [normal] [color]
 t_plane_conf	parse_plane(const char *line)
@@ -26,7 +26,7 @@ t_plane_conf	parse_plane(const char *line)
 	conf = (t_plane_conf){
 		.point = parse_vec3(split[1]),
 		.normal = parse_vec3(split[2]),
-		.color = parse_rgb(split[3])};
+		.color = rgb_normalize(parse_rgb(split[3]))};
 	if (!is_normalized(conf.normal))
 		exit_with_error(EXIT_FAILURE, "plane: invalid value");
 	free_array(split);
@@ -47,7 +47,7 @@ t_sphere_conf	parse_sphere(const char *line)
 	conf = (t_sphere_conf){
 		.center = parse_vec3(split[1]),
 		.diameter = parse_double(split[2]),
-		.color = parse_rgb(split[3])};
+		.color = rgb_normalize(parse_rgb(split[3]))};
 	if (conf.diameter <= 0)
 		exit_with_error(EXIT_FAILURE, "sphere: invalid value");
 	free_array(split);
@@ -70,7 +70,7 @@ t_cylinder_conf	parse_cylinder(const char *line)
 		.axis = parse_vec3(split[2]),
 		.diameter = parse_double(split[3]),
 		.height = parse_double(split[4]),
-		.color = parse_rgb(split[5])};
+		.color = rgb_normalize(parse_rgb(split[5]))};
 	if (!is_normalized(conf.axis) || conf.diameter <= 0 || conf.height <= 0)
 		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
 	free_array(split);
@@ -93,7 +93,7 @@ t_cone_conf	parse_cone(const char *line)
 		.axis = parse_vec3(split[2]),
 		.diameter = parse_double(split[3]),
 		.height = parse_double(split[4]),
-		.color = parse_rgb(split[5])};
+		.color = rgb_normalize(parse_rgb(split[5]))};
 	if (!is_normalized(conf.axis) || conf.diameter <= 0 || conf.height <= 0)
 		exit_with_error(EXIT_FAILURE, "cone: invalid value");
 	free_array(split);

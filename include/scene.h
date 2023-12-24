@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
+#ifndef SCENE_H
+# define SCENE_H
 
 # include "libft.h"
 # include "vector.h"
@@ -109,13 +109,13 @@ typedef struct s_object
 
 // lights: list<t_light_config>
 // objects: list<t_object_config>
-typedef struct s_config
+typedef struct s_scene
 {
 	t_ambient_conf	ambient;
 	t_camera_conf	camera;
 	t_list			*lights;
 	t_list			*objects;
-}					t_config;
+}					t_scene;
 
 typedef struct s_parse_option
 {
@@ -123,8 +123,8 @@ typedef struct s_parse_option
 }					t_parse_option;
 
 // exit with error if failed
-t_config			*parse_config(const char *path, t_parse_option opt);
-void				free_config(t_config *config);
+t_scene				*parse_scene(const char *path, t_parse_option opt);
+void				free_config(t_scene *config);
 
 // internal
 t_ambient_conf		parse_ambient(const char *line);
@@ -154,7 +154,7 @@ bool				is_in_range(double value, double min, double max);
 bool				is_in_range_uint(unsigned int value,
 						unsigned int min, unsigned int max);
 
-t_config			*new_config(void);
+t_scene				*new_scene(void);
 t_object			*new_object(t_object_type type);
 
 typedef struct s_parse_state

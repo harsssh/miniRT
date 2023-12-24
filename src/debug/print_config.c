@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "scene.h"
 #include "debug.h"
 
 static void	print_lights(t_list *lights, int indent)
@@ -55,7 +55,7 @@ static void	print_objects(t_list *objects, int indent)
 	}
 }
 
-void	print_config(t_config config)
+void	print_config(t_scene config)
 {
 	printf("Ambient: ratio=%.1lf, color=", config.ambient.ratio);
 	print_rgb(config.ambient.color, true);

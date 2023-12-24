@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   is_in_range.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:12:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/17 07:49:52 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/19 00:19:14 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/19 00:19:16 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "scene.h"
 
-# include "scene.h"
-# include <stdio.h>
+bool	is_in_range(double value, double min, double max)
+{
+	return (min <= value && value <= max);
+}
 
-void	print_config(t_scene config);
-void	print_vec(t_vec3 vec, bool newline);
-void	print_rgb(t_rgb color, bool newline);
-void	print_sphere_conf(t_sphere_conf conf);
-void	print_plane_conf(t_plane_conf conf);
-void	print_cylinder_conf(t_cylinder_conf conf);
-void	print_material(t_material mat);
-
-#endif
+bool	is_in_range_uint(unsigned int value, unsigned int min, unsigned int max)
+{
+	return (min <= value && value <= max);
+}

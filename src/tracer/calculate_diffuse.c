@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destructor.c                                       :+:      :+:    :+:   */
+/*   calculate_diffuse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 00:47:09 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 00:53:05 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/25 06:56:56 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/25 06:56:58 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "config.h"
+#include "tracer.h"
 
-void	free_object(void *data)
+t_rgb	calculate_diffuse(t_light_conf light, t_hit_record rec)
 {
-	t_object	*obj;
-
-	obj = data;
-	free(obj->object);
-	free(obj);
-}
-
-void	free_config(t_config *config)
-{
-	ft_list_destroy(config->lights, free);
-	ft_list_destroy(config->objects, free_object);
-	free(config);
+	(void)light;
+	(void)rec;
+	return (vec3_zero());
 }

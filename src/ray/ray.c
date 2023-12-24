@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.h                                            :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:12:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/17 07:49:52 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/25 04:36:36 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/25 04:36:38 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEBUG_H
-# define DEBUG_H
+#include "ray.h"
 
-# include "scene.h"
-# include <stdio.h>
+t_ray	new_ray(t_vec3 origin, t_vec3 direction)
+{
+	t_ray	ray;
 
-void	print_config(t_scene config);
-void	print_vec(t_vec3 vec, bool newline);
-void	print_rgb(t_rgb color, bool newline);
-void	print_sphere_conf(t_sphere_conf conf);
-void	print_plane_conf(t_plane_conf conf);
-void	print_cylinder_conf(t_cylinder_conf conf);
-void	print_material(t_material mat);
+	ray.origin = origin;
+	ray.direction = direction;
+	return (ray);
+}
 
-#endif
+t_vec3	ray_at(t_ray ray, double t)
+{
+	return (vec3_add_scaled(ray.origin, ray.direction, t));
+}
