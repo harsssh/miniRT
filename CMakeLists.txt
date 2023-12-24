@@ -29,8 +29,6 @@ ExternalProject_Add(
 )
 ExternalProject_Get_Property(minilibx SOURCE_DIR)
 set(MLX_SOURCE_DIR ${SOURCE_DIR})
-# debug
-message(STATUS "MLX_SOURCE_DIR: ${MLX_SOURCE_DIR}")
 
 # Add minilibx as a static library
 add_library(mlx STATIC IMPORTED)
@@ -50,6 +48,7 @@ add_executable(miniRT ${SOURCE_FILES})
 add_dependencies(miniRT minilibx)
 
 # Link the libft library and minilibx
+target_link_directories(miniRT PUBLIC /usr/X11/lib)
 target_link_libraries(miniRT ft mlx m X11 Xext)
 
 # Add tests
