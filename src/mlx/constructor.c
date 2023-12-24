@@ -13,12 +13,14 @@
 #include "libft.h"
 #include "mlx_utils.h"
 #include <X11/X.h>
+#include <X11/keysym.h>
 #include <stdlib.h>
 
-#if defined(LINUX)
+// NOTE: ESCAPE_KEY may be different depending on the environment.
+#if defined(XK_Escape)
+# define ESCAPE_KEY XK_Escape
+#else
 # define ESCAPE_KEY 0xff1b
-#elif defined(MACOS)
-# define ESCAPE_KEY 0x35
 #endif
 
 static void	init_mlx(t_mlx *mlx, int width, int height, char *title)
@@ -45,10 +47,19 @@ static int	terminate(void)
 	exit(EXIT_SUCCESS);
 }
 
+static int key_handler(int key, void *param)
+{
+	(void)param;
+
+	if (key == ESCAPE_KEY)
+		terminate();
+	return (0);
+}
+
 static void	init_event_handler(t_mlx *mlx)
 {
 	mlx_hook(mlx->window, DestroyNotify, StructureNotifyMask, terminate, NULL);
-	mlx_hook(mlx->window, KeyPress, KeyPressMask, terminate, NULL);
+	mlx_key_hook(mlx->window, key_handler, NULL);
 }
 
 t_mlx	*new_mlx(int width, int height, char *title)
