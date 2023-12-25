@@ -29,10 +29,14 @@ t_object	*new_object(t_object_type type)
 	object = ft_calloc(1, sizeof(t_object));
 	object->type = type;
 	if (type == OBJ_SPHERE)
-		object->conf = ft_xmalloc(sizeof(t_sphere_conf));
+		object->conf = ft_calloc(1, sizeof(t_sphere_conf));
 	else if (type == OBJ_PLANE)
-		object->conf = ft_xmalloc(sizeof(t_plane_conf));
+		object->conf = ft_calloc(1, sizeof(t_plane_conf));
 	else if (type == OBJ_CYLINDER)
-		object->conf = ft_xmalloc(sizeof(t_cylinder_conf));
+		object->conf = ft_calloc(1, sizeof(t_cylinder_conf));
+	else if (type == OBJ_CONE)
+		object->conf = ft_calloc(1, sizeof(t_cone_conf));
+	else if (type == OBJ_CIRCLE)
+		object->conf = ft_calloc(1, sizeof(t_circle_conf));
 	return (object);
 }
