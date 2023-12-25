@@ -45,7 +45,7 @@ static void	calculate_side_intersection(t_cylinder_conf conf, t_ray ray,
 
 	q->a = vec3_length_squared(u);
 	q->half_b = vec3_dot(u, v);
-	q->c = vec3_length_squared(v) - conf.diameter * conf.diameter / 4;
+	q->c = vec3_length_squared(v) - conf.radius * conf.radius;
 	solve_quadratic(q);
 }
 
@@ -65,7 +65,7 @@ bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin,
 		.conf = &(t_circle_conf){
 		.center = vec3_add_scaled(conf.center, cap_normal, conf.height / 2),
 		.normal = cap_normal,
-		.diameter = conf.diameter,
+		.radius = conf.radius,
 		.color = conf.color},
 		.material = cyl->material
 	};

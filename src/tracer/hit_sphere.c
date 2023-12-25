@@ -18,7 +18,7 @@ static void	set_rec(t_object *sphere, t_ray ray, double t, t_hit_record *rec)
 
 	rec->t = t;
 	rec->point = ray_at(ray, t);
-	rec->normal = vec3_div(vec3_sub(rec->point, conf.center), conf.diameter);
+	rec->normal = vec3_div(vec3_sub(rec->point, conf.center), conf.radius);
 	rec->material = sphere->material;
 	rec->object_color = conf.color;
 }
@@ -31,7 +31,7 @@ bool	hit_sphere(t_object *sphere, t_ray ray, double tmin, t_hit_record *rec)
 	q.a = vec3_length_squared(ray.direction);
 	q.half_b = vec3_dot(vec3_sub(ray.origin, conf.center), ray.direction);
 	q.c = vec3_length_squared(vec3_sub(ray.origin, conf.center))
-		- conf.diameter * conf.diameter / 4;
+		- conf.radius * conf.radius;
 	solve_quadratic(&q);
 	if (!q.solved)
 		return (false);

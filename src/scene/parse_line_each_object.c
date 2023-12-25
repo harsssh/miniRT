@@ -46,9 +46,9 @@ t_sphere_conf	parse_sphere(const char *line)
 		exit_with_error(EXIT_PARSE_ERROR, "sphere: invalid format");
 	conf = (t_sphere_conf){
 		.center = parse_vec3(split[1]),
-		.diameter = parse_double(split[2]),
+		.radius = parse_double(split[2]) / 2,
 		.color = rgb_normalize(parse_rgb(split[3]))};
-	if (conf.diameter <= 0)
+	if (conf.radius <= 0)
 		exit_with_error(EXIT_FAILURE, "sphere: invalid value");
 	free_array(split);
 	return (conf);
@@ -68,10 +68,10 @@ t_cylinder_conf	parse_cylinder(const char *line)
 	conf = (t_cylinder_conf){
 		.center = parse_vec3(split[1]),
 		.axis = parse_vec3(split[2]),
-		.diameter = parse_double(split[3]),
+		.radius = parse_double(split[3]) / 2,
 		.height = parse_double(split[4]),
 		.color = rgb_normalize(parse_rgb(split[5]))};
-	if (!is_normalized(conf.axis) || conf.diameter <= 0 || conf.height <= 0)
+	if (!is_normalized(conf.axis) || conf.radius <= 0 || conf.height <= 0)
 		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
 	free_array(split);
 	return (conf);
@@ -91,10 +91,10 @@ t_cone_conf	parse_cone(const char *line)
 	conf = (t_cone_conf){
 		.center = parse_vec3(split[1]),
 		.axis = parse_vec3(split[2]),
-		.diameter = parse_double(split[3]),
+		.radius = parse_double(split[3]) / 2,
 		.height = parse_double(split[4]),
 		.color = rgb_normalize(parse_rgb(split[5]))};
-	if (!is_normalized(conf.axis) || conf.diameter <= 0 || conf.height <= 0)
+	if (!is_normalized(conf.axis) || conf.radius <= 0 || conf.height <= 0)
 		exit_with_error(EXIT_FAILURE, "cone: invalid value");
 	free_array(split);
 	return (conf);

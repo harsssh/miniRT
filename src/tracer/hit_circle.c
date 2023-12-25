@@ -27,5 +27,5 @@ bool	hit_circle(t_object *circ, t_ray ray, double tmin, t_hit_record *rec)
 	};
 	if (!hit_plane(&plane, ray, tmin, rec))
 		return (false);
-	return (vec3_distance(rec->point, conf.center) < conf.diameter / 2);
+	return (vec3_distance(rec->point, conf.center) < conf.radius);
 }

@@ -52,7 +52,7 @@ typedef struct s_light_conf
 typedef struct s_sphere_conf
 {
 	t_vec3			center;
-	double			diameter;
+	double			radius;
 	t_rgb			color;
 }					t_sphere_conf;
 
@@ -67,7 +67,7 @@ typedef struct s_cylinder_conf
 {
 	t_vec3			center;
 	t_vec3			axis;
-	double			diameter;
+	double			radius;
 	double			height;
 	t_rgb			color;
 }					t_cylinder_conf;
@@ -76,7 +76,7 @@ typedef struct s_cone_conf
 {
 	t_vec3			center;
 	t_vec3			axis;
-	double			diameter;
+	double			radius;
 	double			height;
 	t_rgb			color;
 }					t_cone_conf;
@@ -85,7 +85,7 @@ typedef struct s_circle_conf
 {
 	t_vec3			center;
 	t_vec3			normal;
-	double			diameter;
+	double			radius;
 	t_rgb			color;
 }					t_circle_conf;
 
