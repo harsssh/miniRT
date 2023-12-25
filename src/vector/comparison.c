@@ -12,6 +12,8 @@
 
 #include "vector.h"
 
+# define EPSILON 1e-6
+
 // equality
 bool	vec3_equal(t_vec3 a, t_vec3 b)
 {
@@ -22,4 +24,9 @@ bool	vec3_equal(t_vec3 a, t_vec3 b)
 bool	vec3_not_equal(t_vec3 a, t_vec3 b)
 {
 	return (!vec3_equal(a, b));
+}
+
+bool	vec3_parallel(t_vec3 a, t_vec3 b)
+{
+	return (vec3_length_squared(vec3_cross(a, b)) < EPSILON);
 }

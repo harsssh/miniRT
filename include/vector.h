@@ -65,6 +65,7 @@ t_vec3			vec3_rotate_z(t_vec3 a, t_radian angle);
 // comparison
 bool			vec3_equal(t_vec3 a, t_vec3 b);
 bool			vec3_not_equal(t_vec3 a, t_vec3 b);
+bool			vec3_parallel(t_vec3 a, t_vec3 b);
 
 // utility
 t_vec3			vec3_normalize(t_vec3 a);

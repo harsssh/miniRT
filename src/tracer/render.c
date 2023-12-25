@@ -13,10 +13,18 @@
 #include "camera.h"
 #include "tracer.h"
 
+static t_vec3	camera_vup(t_camera_conf conf)
+{
+	if (vec3_parallel(conf.orientation, vec3_axis_y()))
+		return (vec3_axis_z());
+	return (vec3_axis_y());
+}
+
 void	render_scene(t_mlx *mlx, t_scene *scene)
 {
 	const t_camera	camera = new_camera(
-			scene->camera, vec3_axis_y(), (double)mlx->width / mlx->height);
+			scene->camera, camera_vup(scene->camera),
+			(double)mlx->width / mlx->height);
 	t_ray			ray;
 	t_rgb			color;
 	int				x;
