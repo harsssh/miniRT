@@ -341,7 +341,7 @@ TEST(ConfigTest, ParseSphere) {
 	auto line = "sp  -30,0,40  20  255,255,255";
 	auto sphere = parse_sphere(line);
 	expect_vec3(sphere.center, -30, 0, 40);
-	EXPECT_DOUBLE_EQ(sphere.diameter, 20);
+	EXPECT_DOUBLE_EQ(sphere.radius, 10);
 	expect_vec3(sphere.color, 1, 1, 1);
 }
 
@@ -390,7 +390,7 @@ TEST(ConfigTest, ParseCylinder) {
 	auto cylinder = parse_cylinder(line);
 	expect_vec3(cylinder.center, 50.0, 0.0, 20.6);
 	expect_vec3(cylinder.axis, 0, 0, 1.0);
-	EXPECT_DOUBLE_EQ(cylinder.diameter, 14.2);
+	EXPECT_DOUBLE_EQ(cylinder.radius, 7.1);
 	EXPECT_DOUBLE_EQ(cylinder.height, 21.42);
 	expect_vec3(cylinder.color, 10.0/255, 0, 1);
 }

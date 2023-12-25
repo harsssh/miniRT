@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:27:24 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 02:54:20 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/26 07:07:20 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_sphere_conf(t_sphere_conf conf)
 {
 	printf("Sphere: center=");
 	print_vec(conf.center, false);
-	printf(", diameter=%.1lf, color=", conf.diameter);
+	printf(", diameter=%.1lf, color=", conf.radius * 2);
 	print_rgb(conf.color, true);
 }
 
@@ -37,7 +37,7 @@ void	print_cylinder_conf(t_cylinder_conf conf)
 	printf(", axis=");
 	print_vec(conf.axis, false);
 	printf(", diameter=%.1lf, height=%.1lf, color=",
-		conf.diameter, conf.height);
+		conf.radius * 2, conf.height);
 	print_rgb(conf.color, true);
 }
 
