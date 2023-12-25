@@ -108,7 +108,7 @@ typedef struct s_object
 }					t_object;
 
 // lights: list<t_light_config>
-// objects: list<t_object_config>
+// objects: list<t_object>
 typedef struct s_scene
 {
 	t_ambient_conf	ambient;
