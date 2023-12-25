@@ -23,41 +23,26 @@ static void	set_rec(t_object *sphere, t_ray ray, double t, t_hit_record *rec)
 	rec->object_color = conf.color;
 }
 
-static double	calculate_discriminant(t_sphere_conf conf, t_ray ray, double a,
-		double half_b)
-{
-	t_vec3	oc;
-	double	c;
-	double	discriminant;
-
-	oc = vec3_sub(ray.origin, conf.center);
-	c = vec3_length_squared(oc) - conf.diameter * conf.diameter;
-	discriminant = half_b * half_b - a * c;
-	return (discriminant);
-}
-
 bool	hit_sphere(t_object *sphere, t_ray ray, double tmin, t_hit_record *rec)
 {
 	const t_sphere_conf	conf = *(t_sphere_conf *)sphere->conf;
-	double				a;
-	double				half_b;
-	double				discriminant;
+	t_quadratic 		q;
 
-	a = vec3_length_squared(ray.direction);
-	half_b = vec3_dot(vec3_sub(ray.origin, conf.center), ray.direction);
-	discriminant = calculate_discriminant(conf, ray, a, half_b);
-	if (discriminant < 0)
+	q.a = vec3_length_squared(ray.direction);
+	q.half_b = vec3_dot(vec3_sub(ray.origin, conf.center), ray.direction);
+	q.c = vec3_length_squared(vec3_sub(ray.origin, conf.center))
+		- conf.diameter * conf.diameter / 4;
+	solve_quadratic(&q);
+	if (!q.solved)
 		return (false);
-	rec->t = (-half_b - sqrt(discriminant)) / a;
-	if (rec->t > tmin)
+	if (q.t1 > tmin)
 	{
-		set_rec(sphere, ray, rec->t, rec);
+		set_rec(sphere, ray, q.t1, rec);
 		return (true);
 	}
-	rec->t = (-half_b + sqrt(discriminant)) / a;
-	if (rec->t > tmin)
+	if (q.t2 > tmin)
 	{
-		set_rec(sphere, ray, rec->t, rec);
+		set_rec(sphere, ray, q.t2, rec);
 		return (true);
 	}
 	return (false);
