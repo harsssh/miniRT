@@ -37,3 +37,9 @@ t_vec3	vec3_scale(t_vec3 a, double scale)
 {
 	return (vec3(a.x * scale, a.y * scale, a.z * scale));
 }
+
+// scalar division
+t_vec3	vec3_div(t_vec3 a, double divisor)
+{
+	return (vec3(a.x / divisor, a.y / divisor, a.z / divisor));
+}
