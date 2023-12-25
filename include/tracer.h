@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 04:36:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/25 06:49:54 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/25 22:48:22 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_rgb			calculate_specular(t_light_conf light, t_ray ray,
 
 typedef bool	(*t_hit_func)(t_object *, t_ray, double, t_hit_record *);
 t_hit_func		get_hit_func(t_object *obj);
-bool			hit_sphere(t_object *sphere, t_ray ray, double t_min, t_hit_record *rec);
+bool			hit_sphere(t_object *sphere, t_ray ray, double t_min,
+					t_hit_record *rec);
 
 #endif

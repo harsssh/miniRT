@@ -6,13 +6,13 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 12:20:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/15 22:29:01 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/25 22:48:37 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-# define EPSILON 1e-3
+#define EPSILON 1e-3
 
 // equality
 bool	vec3_equal(t_vec3 a, t_vec3 b)
