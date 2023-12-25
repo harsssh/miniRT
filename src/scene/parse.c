@@ -74,7 +74,8 @@ t_scene	*parse_scene(const char *path, t_parse_option opt)
 			exit_with_error(EXIT_FAILURE, "failed to read file");
 		if (line == NULL)
 			break ;
-		parse_line(scene, line, &state);
+		if (*line != '\n' && *line != '#')
+			parse_line(scene, line, &state);
 		free(line);
 	}
 	validate_state(state, opt);
