@@ -12,7 +12,7 @@
 
 #include "vector.h"
 
-# define EPSILON 1e-6
+# define EPSILON 1e-3
 
 // equality
 bool	vec3_equal(t_vec3 a, t_vec3 b)
