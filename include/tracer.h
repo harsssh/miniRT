@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 04:36:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/25 22:48:22 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/26 06:55:23 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool			hit_plane(t_object *plane, t_ray ray, double tmin,
 bool			hit_cylinder(t_object *cyl, t_ray ray, double tmin,
 					t_hit_record *rec);
 bool			hit_circle(t_object *circ, t_ray ray, double tmin,
-				   t_hit_record *rec);
+					t_hit_record *rec);
 
 typedef struct s_quadratic
 {

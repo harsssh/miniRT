@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quadratic.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/26 07:00:10 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/26 07:00:11 by kemizuki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tracer.h"
 
 // If `a` is close to 0, there are no solutions as the quadratic equation.
 void	solve_quadratic(t_quadratic *q)
 {
-	double discriminant;
+	double	discriminant;
 
 	q->solved = false;
 	if (fabs(q->a) < 1e-3)

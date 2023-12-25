@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/26 06:57:02 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/26 07:00:00 by kemizuki         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tracer.h"
 
 static bool	set_rec_side(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
@@ -23,10 +35,12 @@ static bool	is_hit_side(t_cylinder_conf conf, t_vec3 point)
 }
 
 // Find the intersection with an infinite cylinder.
-static void calculate_side_intersection(t_cylinder_conf conf, t_ray ray, t_quadratic *q)
+static void	calculate_side_intersection(t_cylinder_conf conf, t_ray ray,
+										t_quadratic *q)
 {
 	const t_vec3	oc = vec3_sub(ray.origin, conf.center);
-	const t_vec3	u = vec3_sub(ray.direction, vec3_project(ray.direction, conf.axis));
+	const t_vec3	u = vec3_sub(ray.direction,
+			vec3_project(ray.direction, conf.axis));
 	const t_vec3	v = vec3_sub(oc, vec3_project(oc, conf.axis));
 
 	q->a = vec3_length_squared(u);
@@ -35,7 +49,8 @@ static void calculate_side_intersection(t_cylinder_conf conf, t_ray ray, t_quadr
 	solve_quadratic(q);
 }
 
-bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin, t_hit_record *rec)
+bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin,
+						t_hit_record *rec)
 {
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
 	t_object				circle;
@@ -48,11 +63,10 @@ bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin, t_hit_record *rec)
 	circle = (t_object){
 		.type = OBJ_CIRCLE,
 		.conf = &(t_circle_conf){
-			.center = vec3_add_scaled(conf.center, cap_normal, conf.height / 2),
-			.normal = cap_normal,
-			.diameter = conf.diameter,
-			.color = conf.color
-		},
+		.center = vec3_add_scaled(conf.center, cap_normal, conf.height / 2),
+		.normal = cap_normal,
+		.diameter = conf.diameter,
+		.color = conf.color},
 		.material = cyl->material
 	};
 	return (hit_circle(&circle, ray, tmin, rec));
