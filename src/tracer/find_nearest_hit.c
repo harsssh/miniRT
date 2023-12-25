@@ -24,7 +24,7 @@ bool	find_nearest_hit(t_scene *scene, t_ray ray, t_hit_record *rec)
 	while (obj_node != NULL)
 	{
 		hit_func = get_hit_func(obj_node->data);
-		if (hit_func != NULL && hit_func(obj_node->data, ray, &tmp_rec))
+		if (hit_func != NULL && hit_func(obj_node->data, ray, 0, &tmp_rec))
 		{
 			if (!hit_anything || tmp_rec.t < rec->t)
 			{

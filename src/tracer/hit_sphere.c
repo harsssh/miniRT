@@ -23,7 +23,7 @@ static double calculate_discriminant(t_sphere_conf conf, t_ray ray, double a, do
 	return (discriminant);
 }
 
-bool	hit_sphere(t_object *sphere, t_ray ray, t_hit_record *rec)
+bool	hit_sphere(t_object *sphere, t_ray ray, double tmin, t_hit_record *rec)
 {
 	const t_sphere_conf conf = *(t_sphere_conf *)sphere->conf;
 	double	a;
@@ -36,13 +36,13 @@ bool	hit_sphere(t_object *sphere, t_ray ray, t_hit_record *rec)
 	if (discriminant < 0)
 		return (false);
 	rec->t = (-half_b - sqrt(discriminant)) / a;
-	if (rec->t > 0)
+	if (rec->t > tmin)
 	{
 		set_rec(sphere, ray, rec->t, rec);
 		return (true);
 	}
 	rec->t = (-half_b + sqrt(discriminant)) / a;
-	if (rec->t > 0)
+	if (rec->t > tmin)
 	{
 		set_rec(sphere, ray, rec->t, rec);
 		return (true);
