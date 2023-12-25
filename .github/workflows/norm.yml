@@ -1,6 +1,7 @@
 ---
 name: Norminette
 on:
+  workflow_dispatch:
   push:
     paths:
       - "libft/**"
