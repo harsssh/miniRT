@@ -81,12 +81,21 @@ typedef struct s_cone_conf
 	t_rgb			color;
 }					t_cone_conf;
 
+typedef struct s_circle_conf
+{
+	t_vec3			center;
+	t_vec3			normal;
+	double			diameter;
+	t_rgb			color;
+}					t_circle_conf;
+
 typedef enum e_object_type
 {
 	OBJ_SPHERE,
 	OBJ_PLANE,
 	OBJ_CYLINDER,
-	OBJ_CONE
+	OBJ_CONE,
+	OBJ_CIRCLE
 }					t_object_type;
 
 typedef struct s_material

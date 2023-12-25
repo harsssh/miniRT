@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hit_func.c                                         :+:      :+:    :+:   */
+/*   quadratic.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/25 22:49:32 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/25 22:49:33 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/26 07:00:10 by kemizuki          #+#    #+#             */
+/*   Updated: 2023/12/26 07:00:11 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tracer.h"
 
-t_hit_func	get_hit_func(t_object *obj)
+// If `a` is close to 0, there are no solutions as the quadratic equation.
+void	solve_quadratic(t_quadratic *q)
 {
-	if (obj->type == OBJ_SPHERE)
-		return (hit_sphere);
-	else if (obj->type == OBJ_PLANE)
-		return (hit_plane);
-	else if (obj->type == OBJ_CYLINDER)
-		return (hit_cylinder);
-	return (NULL);
+	double	discriminant;
+
+	q->solved = false;
+	if (fabs(q->a) < 1e-3)
+		return ;
+	discriminant = q->half_b * q->half_b - q->a * q->c;
+	if (discriminant < 0)
+		return ;
+	q->solved = true;
+	q->t1 = (-q->half_b - sqrt(discriminant)) / q->a;
+	q->t2 = (-q->half_b + sqrt(discriminant)) / q->a;
 }
