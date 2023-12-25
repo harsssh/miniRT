@@ -18,5 +18,7 @@ t_hit_func	get_hit_func(t_object *obj)
 		return (hit_sphere);
 	else if (obj->type == OBJ_PLANE)
 		return (hit_plane);
+	else if (obj->type == OBJ_CYLINDER)
+		return (hit_cylinder);
 	return (NULL);
 }

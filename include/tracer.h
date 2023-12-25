@@ -44,5 +44,18 @@ bool			hit_sphere(t_object *sphere, t_ray ray, double tmin,
 					t_hit_record *rec);
 bool			hit_plane(t_object *plane, t_ray ray, double tmin,
 					t_hit_record *rec);
+bool			hit_cylinder(t_object *cyl, t_ray ray, double tmin,
+					t_hit_record *rec);
+
+typedef struct s_quadratic
+{
+	double		a;
+	double		half_b;
+	double		c;
+	bool		solved;
+	double		t1;
+	double		t2;
+}				t_quadratic;
+void			solve_quadratic(t_quadratic *q);
 
 #endif
