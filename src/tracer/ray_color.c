@@ -21,8 +21,8 @@ t_rgb	ray_color(t_scene *scene, t_ray ray)
 
 	if (!find_nearest_hit(scene, ray, &rec))
 		return (vec3_zero());
-	color = vec3_scale(rgb_normalize(scene->ambient.color),
-			scene->ambient.ratio);
+	color = vec3_mul(rec.object_color,
+			vec3_scale(scene->ambient.color, scene->ambient.ratio));
 	light_node = scene->lights->head;
 	while (light_node != NULL)
 	{

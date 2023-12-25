@@ -38,6 +38,8 @@ t_rgb			calculate_diffuse(t_light_conf light, t_hit_record rec);
 t_rgb			calculate_specular(t_light_conf light, t_ray ray,
 					t_hit_record rec);
 
+typedef bool	(*t_hit_func)(t_object *, t_ray, t_hit_record *);
+t_hit_func		get_hit_func(t_object *obj);
 bool			hit_sphere(t_object *sphere, t_ray ray, t_hit_record *rec);
 
 #endif
