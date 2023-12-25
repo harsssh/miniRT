@@ -1,6 +1,6 @@
 #include "tracer.h"
 
-static void	set_rec(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
+static bool	set_rec_side(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
 {
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
 	t_vec3					diff;
@@ -11,43 +11,66 @@ static void	set_rec(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
 	rec->normal = vec3_normalize(vec3_sub(diff, vec3_project(diff, conf.axis)));
 	rec->material = cyl->material;
 	rec->object_color = conf.color;
+	return (true);
 }
 
-static bool	solve(t_cylinder_conf conf, t_ray ray, double *t1, double *t2)
+static bool	is_hit_side(t_cylinder_conf conf, t_vec3 point)
+{
+	const t_vec3	diff = vec3_sub(point, conf.center);
+	const double	dist = vec3_length(vec3_project(diff, conf.axis));
+
+	return (dist < conf.height / 2);
+}
+
+// Find the intersection with an infinite cylinder.
+static void calculate_side_intersection(t_cylinder_conf conf, t_ray ray, t_quadratic *q)
 {
 	const t_vec3	oc = vec3_sub(ray.origin, conf.center);
 	const t_vec3	u = vec3_sub(ray.direction, vec3_project(ray.direction, conf.axis));
 	const t_vec3	v = vec3_sub(oc, vec3_project(oc, conf.axis));
-	t_quadratic		q;
 
-	q.a = vec3_length_squared(u);
-	q.half_b = vec3_dot(u, v);
-	q.c = vec3_length_squared(v) - conf.diameter * conf.diameter / 4;
-	solve_quadratic(&q);
-	if (!q.solved)
-		return (false);
-	*t1 = q.t1;
-	*t2 = q.t2;
-	return (true);
+	q->a = vec3_length_squared(u);
+	q->half_b = vec3_dot(u, v);
+	q->c = vec3_length_squared(v) - conf.diameter * conf.diameter / 4;
+	solve_quadratic(q);
+}
+
+bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin, t_hit_record *rec)
+{
+	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
+	t_object				circle;
+	t_vec3					cap_normal;
+
+	if (vec3_dot(ray.direction, conf.axis) < 0)
+		cap_normal = conf.axis;
+	else
+		cap_normal = vec3_negate(conf.axis);
+	circle = (t_object){
+		.type = OBJ_CIRCLE,
+		.conf = &(t_circle_conf){
+			.center = vec3_add_scaled(conf.center, cap_normal, conf.height / 2),
+			.normal = cap_normal,
+			.diameter = conf.diameter,
+			.color = conf.color
+		},
+		.material = cyl->material
+	};
+	return (hit_circle(&circle, ray, tmin, rec));
 }
 
 bool	hit_cylinder(t_object *cyl, t_ray ray, double tmin, t_hit_record *rec)
 {
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
-	double					t1;
-	double					t2;
+	t_quadratic				q;
 
-	if (!solve(conf, ray, &t1, &t2))
+	calculate_side_intersection(conf, ray, &q);
+	if (!q.solved || q.t1 < tmin)
 		return (false);
-	if (t1 > tmin)
-	{
-		set_rec(cyl, ray, t1, rec);
+	if (is_hit_side(conf, ray_at(ray, q.t1)))
+		return (set_rec_side(cyl, ray, q.t1, rec));
+	if (hit_cylinder_cap(cyl, ray, tmin, rec))
 		return (true);
-	}
-	if (t2 > tmin)
-	{
-		set_rec(cyl, ray, t2, rec);
-		return (true);
-	}
+	if (is_hit_side(conf, ray_at(ray, q.t2)))
+		return (set_rec_side(cyl, ray, q.t2, rec));
 	return (false);
 }
