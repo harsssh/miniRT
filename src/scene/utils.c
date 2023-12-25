@@ -58,7 +58,7 @@ bool	is_normalized(t_vec3 vec)
 	double	len2;
 
 	len2 = vec3_length_squared(vec);
-	return (fabs(len2 - 1.0) < 1e-6);
+	return (fabs(len2 - 1.0) < 1e-3);
 }
 
 void	free_array(char **array)

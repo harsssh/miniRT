@@ -14,7 +14,12 @@
 
 t_rgb	calculate_diffuse(t_light_conf light, t_hit_record rec)
 {
-	(void)light;
-	(void)rec;
-	return (vec3_zero());
+	t_vec3	light_dir;
+	double	dot;
+
+	light_dir = vec3_normalize(vec3_sub(light.position, rec.point));
+	dot = vec3_dot(light_dir, rec.normal);
+	if (dot < 0)
+		dot = 0;
+	return (vec3_scale(vec3_mul(rec.object_color, light.color), dot));
 }

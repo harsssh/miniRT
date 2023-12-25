@@ -22,8 +22,8 @@
 
 # define DEFAULT_AMBIENT_REFLECTANCE 1.0
 # define DEFAULT_DIFFUSE_REFLECTANCE 0.5
-# define DEFAULT_SPECULAR_REFLECTANCE 0.5
-# define DEFAULT_SHININESS 10
+# define DEFAULT_SPECULAR_REFLECTANCE 0.25
+# define DEFAULT_SHININESS 8
 
 // color: [0, 255]
 
@@ -103,12 +103,12 @@ typedef struct s_material
 typedef struct s_object
 {
 	t_object_type	type;
-	void			*object;
+	void			*conf;
 	t_material		material;
 }					t_object;
 
 // lights: list<t_light_config>
-// objects: list<t_object_config>
+// objects: list<t_object>
 typedef struct s_scene
 {
 	t_ambient_conf	ambient;

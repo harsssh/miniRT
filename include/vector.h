@@ -48,6 +48,8 @@ t_vec3			vec3_add(t_vec3 a, t_vec3 b);
 t_vec3			vec3_sub(t_vec3 a, t_vec3 b);
 t_vec3			vec3_cross(t_vec3 a, t_vec3 b);
 t_vec3			vec3_scale(t_vec3 a, double scale);
+t_vec3			vec3_div(t_vec3 a, double divisor);
+t_vec3			vec3_mul(t_vec3 a, t_vec3 b);
 
 double			vec3_dot(t_vec3 a, t_vec3 b);
 double			vec3_length(t_vec3 a);
@@ -63,6 +65,7 @@ t_vec3			vec3_rotate_z(t_vec3 a, t_radian angle);
 // comparison
 bool			vec3_equal(t_vec3 a, t_vec3 b);
 bool			vec3_not_equal(t_vec3 a, t_vec3 b);
+bool			vec3_parallel(t_vec3 a, t_vec3 b);
 
 // utility
 t_vec3			vec3_normalize(t_vec3 a);

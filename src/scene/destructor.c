@@ -17,7 +17,7 @@ void	free_object(void *data)
 	t_object	*obj;
 
 	obj = data;
-	free(obj->object);
+	free(obj->conf);
 	free(obj);
 }
 
