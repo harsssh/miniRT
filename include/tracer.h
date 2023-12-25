@@ -23,6 +23,7 @@ void			render_scene(t_mlx *mlx, t_scene *scene);
 // internal
 typedef struct s_hit_record
 {
+	double		t;
 	t_vec3		point;
 	t_vec3		normal;
 	t_material	material;
@@ -36,5 +37,7 @@ bool			is_illuminated(t_scene *scene, t_light_conf light,
 t_rgb			calculate_diffuse(t_light_conf light, t_hit_record rec);
 t_rgb			calculate_specular(t_light_conf light, t_ray ray,
 					t_hit_record rec);
+
+bool			hit_sphere(t_object *sphere, t_ray ray, t_hit_record *rec);
 
 #endif
