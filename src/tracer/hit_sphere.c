@@ -2,7 +2,7 @@
 
 static void set_rec(t_object *sphere, t_ray ray, double t, t_hit_record *rec)
 {
-	const t_sphere_conf conf = *(t_sphere_conf *)sphere->object;
+	const t_sphere_conf conf = *(t_sphere_conf *)sphere->conf;
 
 	rec->t = t;
 	rec->point = ray_at(ray, t);
@@ -25,7 +25,7 @@ static double calculate_discriminant(t_sphere_conf conf, t_ray ray, double a, do
 
 bool	hit_sphere(t_object *sphere, t_ray ray, t_hit_record *rec)
 {
-	const t_sphere_conf conf = *(t_sphere_conf *)sphere->object;
+	const t_sphere_conf conf = *(t_sphere_conf *)sphere->conf;
 	double	a;
 	double	half_b;
 	double	discriminant;

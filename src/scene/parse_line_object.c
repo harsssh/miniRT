@@ -18,7 +18,7 @@
 static void	init_object(t_object *object, t_object_type type, size_t size)
 {
 	object->type = type;
-	object->object = ft_calloc(1, size);
+	object->conf = ft_calloc(1, size);
 }
 
 static void	parse_object_conf(t_object *object, const char *line)
@@ -26,22 +26,22 @@ static void	parse_object_conf(t_object *object, const char *line)
 	if (ft_strncmp(line, "sp", 2) == 0)
 	{
 		init_object(object, OBJ_SPHERE, sizeof(t_sphere_conf));
-		*(t_sphere_conf *)object->object = parse_sphere(line);
+		*(t_sphere_conf *)object->conf = parse_sphere(line);
 	}
 	else if (ft_strncmp(line, "pl", 2) == 0)
 	{
 		init_object(object, OBJ_PLANE, sizeof(t_plane_conf));
-		*(t_plane_conf *)object->object = parse_plane(line);
+		*(t_plane_conf *)object->conf = parse_plane(line);
 	}
 	else if (ft_strncmp(line, "cy", 2) == 0)
 	{
 		init_object(object, OBJ_CYLINDER, sizeof(t_cylinder_conf));
-		*(t_cylinder_conf *)object->object = parse_cylinder(line);
+		*(t_cylinder_conf *)object->conf = parse_cylinder(line);
 	}
 	else if (ft_strncmp(line, "cy", 2) == 0)
 	{
 		init_object(object, OBJ_CONE, sizeof(t_cone_conf));
-		*(t_cone_conf *)object->object = parse_cone(line);
+		*(t_cone_conf *)object->conf = parse_cone(line);
 	}
 	else
 		exit_with_error(EXIT_PARSE_ERROR, "invalid object type");

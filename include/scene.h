@@ -103,7 +103,7 @@ typedef struct s_material
 typedef struct s_object
 {
 	t_object_type	type;
-	void			*object;
+	void			*conf;
 	t_material		material;
 }					t_object;
 

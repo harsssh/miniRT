@@ -44,11 +44,11 @@ static void	print_objects(t_list *objects, int indent)
 		obj = node->data;
 		printf("%*s", indent, "");
 		if (obj->type == OBJ_PLANE)
-			print_plane_conf(*(t_plane_conf *)obj->object);
+			print_plane_conf(*(t_plane_conf *)obj->conf);
 		else if (obj->type == OBJ_SPHERE)
-			print_sphere_conf(*(t_sphere_conf *)obj->object);
+			print_sphere_conf(*(t_sphere_conf *)obj->conf);
 		else if (obj->type == OBJ_CYLINDER)
-			print_cylinder_conf(*(t_cylinder_conf *)obj->object);
+			print_cylinder_conf(*(t_cylinder_conf *)obj->conf);
 		printf("%*s", indent + 2, "");
 		print_material(obj->material);
 		node = node->next;
