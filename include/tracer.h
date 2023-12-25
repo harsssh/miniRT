@@ -40,7 +40,9 @@ t_rgb			calculate_specular(t_light_conf light, t_ray ray,
 
 typedef bool	(*t_hit_func)(t_object *, t_ray, double, t_hit_record *);
 t_hit_func		get_hit_func(t_object *obj);
-bool			hit_sphere(t_object *sphere, t_ray ray, double t_min,
+bool			hit_sphere(t_object *sphere, t_ray ray, double tmin,
+					t_hit_record *rec);
+bool			hit_plane(t_object *plane, t_ray ray, double tmin,
 					t_hit_record *rec);
 
 #endif
