@@ -63,14 +63,16 @@ bool	hit_cylinder(t_object *cyl, t_ray ray, double tmin, t_hit_record *rec)
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
 	t_quadratic				q;
 
+	if (vec3_parallel(ray.direction, conf.axis))
+		return (hit_cylinder_cap(cyl, ray, tmin, rec));
 	calculate_side_intersection(conf, ray, &q);
-	if (!q.solved || q.t1 < tmin)
+	if (!q.solved)
 		return (false);
-	if (is_hit_side(conf, ray_at(ray, q.t1)))
+	if (q.t1 > tmin && is_hit_side(conf, ray_at(ray, q.t1)))
 		return (set_rec_side(cyl, ray, q.t1, rec));
 	if (hit_cylinder_cap(cyl, ray, tmin, rec))
 		return (true);
-	if (is_hit_side(conf, ray_at(ray, q.t2)))
+	if (q.t2 > tmin && is_hit_side(conf, ray_at(ray, q.t2)))
 		return (set_rec_side(cyl, ray, q.t2, rec));
 	return (false);
 }
