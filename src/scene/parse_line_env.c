@@ -49,11 +49,11 @@ t_camera_conf	parse_camera(const char *line)
 		exit_with_error(EXIT_PARSE_ERROR, "camera: invalid format");
 	orient = parse_vec3(split[2]);
 	fov = parse_uint(split[3]);
-	if (!is_normalized(orient) || !is_in_range(fov, 0, 180))
+	if (!is_bounded(orient) || !is_in_range(fov, 0, 180))
 		exit_with_error(EXIT_FAILURE, "camera: invalid value");
 	conf = (t_camera_conf){
 		.position = parse_vec3(split[1]),
-		.orientation = orient,
+		.orientation = vec3_normalize(orient),
 		.fov = (double)fov};
 	free_array(split);
 	return (conf);
