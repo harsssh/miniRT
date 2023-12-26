@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 06:57:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/26 07:00:00 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/26 10:26:14 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ static bool	set_rec_side(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
 static bool	is_hit_side(t_cylinder_conf conf, t_vec3 point)
 {
 	const t_vec3	top_center = vec3_add_scaled(conf.center,
-		conf.axis, conf.height);
+			conf.axis, conf.height);
 	const t_vec3	to_top = vec3_sub(top_center, point);
 	const t_vec3	to_bottom = vec3_sub(conf.center, point);
 
 	return (vec3_dot(to_top, conf.axis) > 0
-			&& vec3_dot(to_bottom, conf.axis) < 0);
+		&& vec3_dot(to_bottom, conf.axis) < 0);
 }
 
 // Find the intersection with an infinite cylinder.
