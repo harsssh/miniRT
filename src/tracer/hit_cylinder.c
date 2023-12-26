@@ -28,10 +28,13 @@ static bool	set_rec_side(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
 
 static bool	is_hit_side(t_cylinder_conf conf, t_vec3 point)
 {
-	const t_vec3	diff = vec3_sub(point, conf.center);
-	const double	dist = vec3_length(vec3_project(diff, conf.axis));
+	const t_vec3	top_center = vec3_add_scaled(conf.center,
+		conf.axis, conf.height);
+	const t_vec3	to_top = vec3_sub(top_center, point);
+	const t_vec3	to_bottom = vec3_sub(conf.center, point);
 
-	return (dist < conf.height / 2);
+	return (vec3_dot(to_top, conf.axis) > 0
+			&& vec3_dot(to_bottom, conf.axis) < 0);
 }
 
 // Find the intersection with an infinite cylinder.
@@ -49,26 +52,32 @@ static void	calculate_side_intersection(t_cylinder_conf conf, t_ray ray,
 	solve_quadratic(q);
 }
 
-bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin,
-						t_hit_record *rec)
+static bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin,
+							t_hit_record *rec)
 {
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
 	t_object				circle;
 	t_vec3					cap_normal;
+	t_vec3					cap_center;
 
-	if (vec3_dot(ray.direction, conf.axis) < 0)
-		cap_normal = conf.axis;
-	else
+	if (vec3_dot(ray.direction, conf.axis) > 0)
+	{
+		cap_center = conf.center;
 		cap_normal = vec3_negate(conf.axis);
+	}
+	else
+	{
+		cap_center = vec3_add_scaled(conf.center, conf.axis, conf.height);
+		cap_normal = conf.axis;
+	}
 	circle = (t_object){
 		.type = OBJ_CIRCLE,
 		.conf = &(t_circle_conf){
-		.center = vec3_add_scaled(conf.center, cap_normal, conf.height / 2),
+		.center = cap_center,
 		.normal = cap_normal,
 		.radius = conf.radius,
 		.color = conf.color},
-		.material = cyl->material
-	};
+		.material = cyl->material};
 	return (hit_circle(&circle, ray, tmin, rec));
 }
 
