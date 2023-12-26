@@ -53,12 +53,12 @@ void	exit_with_error(int status, const char *message)
 	exit(status);
 }
 
-bool	is_normalized(t_vec3 vec)
+// Determine if each component is within the range of [-1, 1].
+bool	is_bounded(t_vec3 vec)
 {
-	double	len2;
-
-	len2 = vec3_length_squared(vec);
-	return (fabs(len2 - 1.0) < 1e-3);
+	return (is_in_range(vec.x, -1, 1)
+		&& is_in_range(vec.y, -1, 1)
+		&& is_in_range(vec.z, -1, 1));
 }
 
 void	free_array(char **array)

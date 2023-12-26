@@ -27,8 +27,9 @@ t_plane_conf	parse_plane(const char *line)
 		.point = parse_vec3(split[1]),
 		.normal = parse_vec3(split[2]),
 		.color = rgb_normalize(parse_rgb(split[3]))};
-	if (!is_normalized(conf.normal))
+	if (!is_bounded(conf.normal))
 		exit_with_error(EXIT_FAILURE, "plane: invalid value");
+	conf.normal = vec3_normalize(conf.normal);
 	free_array(split);
 	return (conf);
 }
@@ -71,8 +72,9 @@ t_cylinder_conf	parse_cylinder(const char *line)
 		.radius = parse_double(split[3]) / 2,
 		.height = parse_double(split[4]),
 		.color = rgb_normalize(parse_rgb(split[5]))};
-	if (!is_normalized(conf.axis) || conf.radius <= 0 || conf.height <= 0)
+	if (!is_bounded(conf.axis) || conf.radius <= 0 || conf.height <= 0)
 		exit_with_error(EXIT_FAILURE, "cylinder: invalid value");
+	conf.axis = vec3_normalize(conf.axis);
 	free_array(split);
 	return (conf);
 }
@@ -94,8 +96,9 @@ t_cone_conf	parse_cone(const char *line)
 		.radius = parse_double(split[3]) / 2,
 		.height = parse_double(split[4]),
 		.color = rgb_normalize(parse_rgb(split[5]))};
-	if (!is_normalized(conf.axis) || conf.radius <= 0 || conf.height <= 0)
+	if (!is_bounded(conf.axis) || conf.radius <= 0 || conf.height <= 0)
 		exit_with_error(EXIT_FAILURE, "cone: invalid value");
+	conf.axis = vec3_normalize(conf.axis);
 	free_array(split);
 	return (conf);
 }

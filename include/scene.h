@@ -156,7 +156,7 @@ t_rgb				parse_rgb(const char *str);
 char				**split_space(const char *str);
 void				exit_with_error(int status, const char *message);
 size_t				array_size(char **array);
-bool				is_normalized(t_vec3 vec);
+bool				is_bounded(t_vec3 vec);
 void				free_array(char **array);
 
 bool				is_in_range(double value, double min, double max);
