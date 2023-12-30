@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 12:04:29 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 04:18:42 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:34:01 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ typedef struct s_vec3
 }				t_vec3;
 
 typedef t_vec3	t_rgb;
+t_rgb			white(void);
+t_rgb			black(void);
+
 typedef double	t_radian;
 typedef double	t_degree;
 

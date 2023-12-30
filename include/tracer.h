@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 04:36:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/26 06:55:23 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/30 14:33:46 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,16 @@ typedef struct s_quadratic
 	double		t2;
 }				t_quadratic;
 void			solve_quadratic(t_quadratic *q);
+
+typedef struct s_checkers
+{
+	int			width;
+	int			height;
+	t_rgb		color_a;
+	t_rgb		color_b;
+}				t_checkers;
+t_checkers		create_checkers(int width, int height, t_rgb color_a,
+					t_rgb color_b);
+t_rgb			get_checker_color_at(t_checkers checkers, t_vec3 uv);
 
 #endif
