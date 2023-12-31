@@ -62,13 +62,14 @@ void			solve_quadratic(t_quadratic *q);
 
 typedef struct s_checkers
 {
-	int			width;
-	int			height;
+	double		width;
+	double		height;
 	t_rgb		color_a;
 	t_rgb		color_b;
 }				t_checkers;
-t_checkers		create_checkers(int width, int height, t_rgb color_a,
+t_checkers		create_checkers(double width, double height, t_rgb color_a,
 					t_rgb color_b);
 t_rgb			get_checker_color_at(t_checkers checkers, t_vec3 uv);
+t_rgb			get_cylindrical_color_at(t_object *cyl, t_vec3 point);
 
 #endif

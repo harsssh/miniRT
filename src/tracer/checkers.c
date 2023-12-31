@@ -6,13 +6,14 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:53:16 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/12/30 14:32:08 by smatsuo          ###   ########.fr       */
+/*   Updated: 2023/12/31 21:47:55 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tracer.h"
 
-t_checkers	create_checkers(int width, int height, t_rgb color_a, t_rgb color_b)
+t_checkers	create_checkers(double width, double height, t_rgb color_a,
+						t_rgb color_b)
 {
 	return ((t_checkers){
 		.width = width,
