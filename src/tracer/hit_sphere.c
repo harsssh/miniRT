@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 22:48:56 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/30 14:32:27 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/02 07:45:23 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static t_vec3	spherical_map(t_object *sphere, t_vec3 p)
 static t_rgb	get_color_at(t_object *sphere, t_vec3 point)
 {
 	const t_sphere_conf	conf = *(t_sphere_conf *)sphere->conf;
-	const t_checkers	checkers = create_checkers(20, 10, conf.color, black());
+	const t_checkers	checkers = create_checkers(20, 10, conf.color,
+			color_b());
 	const t_vec3		spherical_point = spherical_map(sphere, point);
 
 	return (get_checker_color_at(checkers, spherical_point));

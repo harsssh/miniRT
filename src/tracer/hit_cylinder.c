@@ -76,7 +76,8 @@ static bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin,
 		.center = cap_center,
 		.normal = cap_normal,
 		.radius = conf.radius,
-		.color = conf.color},
+		.color = conf.color,
+		.parent = cyl},
 		.material = cyl->material};
 	return (hit_circle(&circle, ray, tmin, rec));
 }

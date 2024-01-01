@@ -69,7 +69,11 @@ typedef struct s_checkers
 }				t_checkers;
 t_checkers		create_checkers(double width, double height, t_rgb color_a,
 					t_rgb color_b);
+t_checkers		create_cylindrical_checkers(t_object *cyl);
 t_rgb			get_checker_color_at(t_checkers checkers, t_vec3 uv);
+void			set_checker_ratio(double a, double b, int *pa, int *pb);
+t_rgb			color_b(void);
 t_rgb			get_cylindrical_color_at(t_object *cyl, t_vec3 point);
+t_vec3			planar_map(t_object *plane, t_vec3 p);
 
 #endif

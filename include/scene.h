@@ -25,6 +25,33 @@
 # define DEFAULT_SPECULAR_REFLECTANCE 0.25
 # define DEFAULT_SHININESS 8
 
+typedef enum e_object_type
+{
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER,
+	OBJ_CONE,
+	OBJ_CIRCLE
+}					t_object_type;
+
+typedef struct s_material
+{
+	double			diffuse_reflectance;
+	double			specular_reflectance;
+	double			ambient_reflectance;
+	double			shininess;
+	bool			checker;
+	t_rgb			check_color;
+	const char		*height_map;
+}					t_material;
+
+typedef struct s_object
+{
+	t_object_type	type;
+	void			*conf;
+	t_material		material;
+}					t_object;
+
 // color: [0, 255]
 
 // ration: [0, 1]
@@ -87,34 +114,8 @@ typedef struct s_circle_conf
 	t_vec3			normal;
 	double			radius;
 	t_rgb			color;
+	t_object		*parent;
 }					t_circle_conf;
-
-typedef enum e_object_type
-{
-	OBJ_SPHERE,
-	OBJ_PLANE,
-	OBJ_CYLINDER,
-	OBJ_CONE,
-	OBJ_CIRCLE
-}					t_object_type;
-
-typedef struct s_material
-{
-	double			diffuse_reflectance;
-	double			specular_reflectance;
-	double			ambient_reflectance;
-	double			shininess;
-	bool			checker;
-	t_rgb			check_color;
-	const char		*height_map;
-}					t_material;
-
-typedef struct s_object
-{
-	t_object_type	type;
-	void			*conf;
-	t_material		material;
-}					t_object;
 
 // lights: list<t_light_config>
 // objects: list<t_object>

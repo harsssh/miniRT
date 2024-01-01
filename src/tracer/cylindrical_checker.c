@@ -6,11 +6,12 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 21:48:27 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/12/31 21:49:11 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/02 07:41:52 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tracer.h"
+#include "debug.h"
 
 static t_vec3	fix_by_axis(t_object *cyl, t_vec3 p)
 {
@@ -19,9 +20,12 @@ static t_vec3	fix_by_axis(t_object *cyl, t_vec3 p)
 	t_vec3					e1;
 	t_vec3					e2;
 
-	e1 = vec3_normalize(vec3_cross(conf.axis, vec3_axis_x()));
+	if (vec3_equal(conf.axis, vec3_axis_y()))
+		return (translated_p);
+	e1 = vec3_cross(conf.axis, vec3_axis_x());
 	if (vec3_equal(e1, vec3_zero()))
-		e1 = vec3_normalize(vec3_cross(conf.axis, vec3_axis_z()));
+		e1 = vec3_cross(conf.axis, vec3_axis_z());
+	e1 = vec3_normalize(e1);
 	e2 = vec3_normalize(vec3_cross(conf.axis, e1));
 	return ((t_vec3){
 		.x = vec3_dot(e1, translated_p),
@@ -43,12 +47,36 @@ static t_vec3	cylindrical_map(t_object *cyl, t_vec3 p)
 	});
 }
 
-t_rgb	get_cylindrical_color_at(t_object *cyl, t_vec3 point)
+t_checkers	create_cylindrical_checkers(t_object *cyl)
 {
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
-	const t_checkers		checkers = create_checkers(conf.radius * 2 * M_PI,
-			conf.height, conf.color, black());
-	const t_vec3			cylindrical_point = cylindrical_map(cyl, point);
+	int						width;
+	int						height;
 
+	set_checker_ratio(conf.radius * 2 * M_PI, conf.height + conf.radius * 2,
+		&width, &height);
+	if (height % 2)
+		height++;
+	if (width % 2)
+		width++;
+	return (create_checkers(width, height, conf.color, color_b()));
+}
+
+static t_checkers	get_side_checkers(t_object *cyl, t_checkers root)
+{
+	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
+	const double			height = root.height * conf.height
+		/ (conf.height + conf.radius * 2);
+
+	return (create_checkers(root.width, height, root.color_a, root.color_b));
+}
+
+t_rgb	get_cylindrical_color_at(t_object *cyl, t_vec3 point)
+{
+	const t_checkers	root = create_cylindrical_checkers(cyl);
+	const t_checkers	checkers = get_side_checkers(cyl, root);
+	const t_vec3		cylindrical_point = cylindrical_map(cyl, point);
+
+	print_vec(cylindrical_point,true);
 	return (get_checker_color_at(checkers, cylindrical_point));
 }

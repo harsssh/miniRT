@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tracer.h"
+#include <limits.h>
 
 t_checkers	create_checkers(double width, double height, t_rgb color_a,
 						t_rgb color_b)
@@ -31,4 +32,20 @@ t_rgb	get_checker_color_at(t_checkers checkers, t_vec3 uv)
 	if ((u2 + v2) % 2 == 0)
 		return (checkers.color_a);
 	return (checkers.color_b);
+}
+
+t_rgb	color_b(void)
+{
+	return (black());
+}
+
+void	set_checker_ratio(double a, double b, int *pa, int *pb)
+{
+	while (a < INT_MAX / 10 && b < INT_MAX / 10 && (a < 2 || b < 2))
+	{
+		a *= 10;
+		b *= 10;
+	}
+	*pa = a;
+	*pb = b;
 }
