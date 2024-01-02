@@ -91,7 +91,7 @@ t_cone_conf	parse_cone(const char *line)
 	if (array_size(split) != 6)
 		exit_with_error(EXIT_PARSE_ERROR, "cone: invalid format");
 	conf = (t_cone_conf){
-		.center = parse_vec3(split[1]),
+		.apex = parse_vec3(split[1]),
 		.axis = parse_vec3(split[2]),
 		.radius = parse_double(split[3]) / 2,
 		.height = parse_double(split[4]),

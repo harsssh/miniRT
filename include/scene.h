@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 02:57:11 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:46:16 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_cylinder_conf
 
 typedef struct s_cone_conf
 {
-	t_vec3			center;
+	t_vec3			apex;
 	t_vec3			axis;
 	double			radius;
 	double			height;
