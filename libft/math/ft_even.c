@@ -16,3 +16,10 @@ int	ft_even(int n)
 		return (n + 1);
 	return (n);
 }
+
+int	ft_odd(int n)
+{
+	if (n % 2)
+		return (n);
+	return (n + 1);
+}

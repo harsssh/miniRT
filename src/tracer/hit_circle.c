@@ -47,7 +47,7 @@ static t_checkers	get_cap_checkers(t_object *circ)
 	}
 	else
 		exit_with_error(EXIT_FAILURE, "unexpected object type");
-	height = ft_even(ceil(height));
+	height = ft_odd(ceil(height));
 	return (create_checkers(root.width, height, circ));
 }
 

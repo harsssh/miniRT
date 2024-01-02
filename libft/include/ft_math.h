@@ -16,6 +16,7 @@
 # include <math.h>
 
 int		ft_even(int n);
+int		ft_odd(int n);
 double	ft_pow(double base, int exponent);
 double	ft_to_radian(double degree);
 double	ft_to_degree(double radian);
