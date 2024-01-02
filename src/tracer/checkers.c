@@ -37,16 +37,6 @@ t_checkers	create_checkers(double width, double height, t_object *obj)
 	});
 }
 
-t_checkers	invert(t_checkers checkers)
-{
-	return ((t_checkers){
-		.width = checkers.width,
-		.height = checkers.height,
-		.color_a = checkers.color_b,
-		.color_b = checkers.color_a,
-	});
-}
-
 t_rgb	get_checker_color_at(t_checkers checkers, t_vec3 uv)
 {
 	const int	u2 = floor(uv.x * checkers.width);

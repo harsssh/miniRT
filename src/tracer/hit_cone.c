@@ -22,7 +22,7 @@ static bool	set_rec(t_object *cone, t_ray ray, double t, t_hit_record *rec)
 	rec->normal = vec3_normalize(vec3_sub(pc, vec3_scale(conf.axis,
 					vec3_dot(pc, pc) / vec3_dot(conf.axis, pc))));
 	rec->material = cone->material;
-	rec->object_color = conf.color;
+	rec->object_color = get_conical_color_at(cone, rec->point);
 	return (true);
 }
 
@@ -46,7 +46,8 @@ static bool	hit_cone_cap(t_object *cone, t_ray ray, double tmin,
 		.center = vec3_add_scaled(conf.apex, conf.axis, conf.height),
 		.normal = conf.axis,
 		.radius = conf.radius,
-		.color = conf.color},
+		.color = conf.color,
+		.parent = cone},
 		.material = cone->material};
 	return (hit_circle(&circle, ray, tmin, rec));
 }
