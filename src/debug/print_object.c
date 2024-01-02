@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:27:24 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/26 07:07:20 by kemizuki         ###   ########.fr       */
+/*   Updated: 2023/12/27 22:40:31 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ void	print_cylinder_conf(t_cylinder_conf conf)
 {
 	printf("Cylinder: center=");
 	print_vec(conf.center, false);
+	printf(", axis=");
+	print_vec(conf.axis, false);
+	printf(", diameter=%.1lf, height=%.1lf, color=",
+		conf.radius * 2, conf.height);
+	print_rgb(conf.color, true);
+}
+
+void	print_cone_conf(t_cone_conf conf)
+{
+	printf("Cone: apex=");
+	print_vec(conf.apex, false);
 	printf(", axis=");
 	print_vec(conf.axis, false);
 	printf(", diameter=%.1lf, height=%.1lf, color=",

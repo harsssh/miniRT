@@ -24,6 +24,14 @@ void	solve_quadratic(t_quadratic *q)
 	if (discriminant < 0)
 		return ;
 	q->solved = true;
-	q->t1 = (-q->half_b - sqrt(discriminant)) / q->a;
-	q->t2 = (-q->half_b + sqrt(discriminant)) / q->a;
+	if (q->a < 0)
+	{
+		q->t1 = (-q->half_b + sqrt(discriminant)) / q->a;
+		q->t2 = (-q->half_b - sqrt(discriminant)) / q->a;
+	}
+	else
+	{
+		q->t1 = (-q->half_b - sqrt(discriminant)) / q->a;
+		q->t2 = (-q->half_b + sqrt(discriminant)) / q->a;
+	}
 }

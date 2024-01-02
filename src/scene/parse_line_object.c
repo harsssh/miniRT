@@ -38,7 +38,7 @@ static void	parse_object_conf(t_object *object, const char *line)
 		init_object(object, OBJ_CYLINDER, sizeof(t_cylinder_conf));
 		*(t_cylinder_conf *)object->conf = parse_cylinder(line);
 	}
-	else if (ft_strncmp(line, "cy", 2) == 0)
+	else if (ft_strncmp(line, "co", 2) == 0)
 	{
 		init_object(object, OBJ_CONE, sizeof(t_cone_conf));
 		*(t_cone_conf *)object->conf = parse_cone(line);
