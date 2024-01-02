@@ -13,14 +13,37 @@
 #include "tracer.h"
 #include <limits.h>
 
-t_checkers	create_checkers(double width, double height, t_rgb color_a,
-						t_rgb color_b)
+t_checkers	create_checkers(double width, double height, t_object *obj)
 {
+	t_rgb	color_a;
+
+	if (obj->type == OBJ_CYLINDER)
+		color_a = ((t_cylinder_conf *)obj->conf)->color;
+	else if (obj->type == OBJ_CIRCLE)
+		color_a = ((t_circle_conf *)obj->conf)->color;
+	else if (obj->type == OBJ_CONE)
+		color_a = ((t_cone_conf *)obj->conf)->color;
+	else if (obj->type == OBJ_PLANE)
+		color_a = ((t_plane_conf *)obj->conf)->color;
+	else if (obj->type == OBJ_SPHERE)
+		color_a = ((t_sphere_conf *)obj->conf)->color;
+	else
+		color_a = white();
 	return ((t_checkers){
 		.width = width,
 		.height = height,
 		.color_a = color_a,
-		.color_b = color_b,
+		.color_b = obj->material.check_color,
+	});
+}
+
+t_checkers	invert(t_checkers checkers)
+{
+	return ((t_checkers){
+		.width = checkers.width,
+		.height = checkers.height,
+		.color_a = checkers.color_b,
+		.color_b = checkers.color_a,
 	});
 }
 
@@ -32,11 +55,6 @@ t_rgb	get_checker_color_at(t_checkers checkers, t_vec3 uv)
 	if ((u2 + v2) % 2 == 0)
 		return (checkers.color_a);
 	return (checkers.color_b);
-}
-
-t_rgb	color_b(void)
-{
-	return (black());
 }
 
 void	set_checker_ratio(double a, double b, int *pa, int *pb)

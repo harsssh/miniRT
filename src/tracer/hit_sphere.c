@@ -29,10 +29,11 @@ static t_vec3	spherical_map(t_object *sphere, t_vec3 p)
 static t_rgb	get_color_at(t_object *sphere, t_vec3 point)
 {
 	const t_sphere_conf	conf = *(t_sphere_conf *)sphere->conf;
-	const t_checkers	checkers = create_checkers(20, 10, conf.color,
-			color_b());
+	const t_checkers	checkers = create_checkers(20, 10, sphere);
 	const t_vec3		spherical_point = spherical_map(sphere, point);
 
+	if (!sphere->material.checker)
+		return (conf.color);
 	return (get_checker_color_at(checkers, spherical_point));
 }
 

@@ -12,7 +12,7 @@
 
 #include "tracer.h"
 
-t_vec3	planar_map(t_object *plane, t_vec3 p)
+static t_vec3	planar_map(t_object *plane, t_vec3 p)
 {
 	const t_plane_conf	conf = *(t_plane_conf *)plane->conf;
 	t_vec3				e1;
@@ -37,9 +37,11 @@ t_vec3	planar_map(t_object *plane, t_vec3 p)
 static t_rgb	get_color_at(t_object *plane, t_vec3 point)
 {
 	const t_plane_conf	conf = *(t_plane_conf *)plane->conf;
-	const t_checkers	checkers = create_checkers(2, 2, conf.color, color_b());
+	const t_checkers	checkers = create_checkers(2, 2, plane);
 	const t_vec3		planar_point = planar_map(plane, point);
 
+	if (!plane->material.checker)
+		return (conf.color);
 	return (get_checker_color_at(checkers, planar_point));
 }
 

@@ -15,10 +15,8 @@
 static t_vec3	circular_map(t_object *circ, t_vec3 p)
 {
 	const t_circle_conf	conf = *(t_circle_conf *)circ->conf;
-	const t_vec3		planar_uv = planar_map(&(t_object){
-			.conf = &(t_plane_conf){.normal = conf.normal}
-		}, vec3_sub(p, conf.center));
-	const double		theta = atan2(planar_uv.x, planar_uv.y);
+	const t_vec3		planar_uv = fix_by_axis(conf.parent, conf.center, p);
+	const double		theta = atan2(planar_uv.x, planar_uv.z);
 	const double		raw_u = theta / (2 * M_PI);
 	const double		r = vec3_length(planar_uv);
 
@@ -39,7 +37,7 @@ static t_checkers	get_cap_checkers(t_object *circ, t_checkers root)
 				+ conf.radius * 2);
 	else
 		height = root.height;
-	return (create_checkers(root.width, height, root.color_b, root.color_a));
+	return (create_checkers(root.width, height, circ));
 }
 
 static t_rgb	get_color_at(t_object *circ, t_vec3 point)
@@ -49,6 +47,8 @@ static t_rgb	get_color_at(t_object *circ, t_vec3 point)
 	const t_checkers	checkers = get_cap_checkers(circ, root);
 	const t_vec3		circular_point = circular_map(circ, point);
 
+	if (!circ->material.checker)
+		return (conf.color);
 	return (get_checker_color_at(checkers, circular_point));
 }
 
