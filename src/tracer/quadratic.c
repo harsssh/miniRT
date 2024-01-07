@@ -15,15 +15,12 @@
 // If `a` is close to 0, there are no solutions as the quadratic equation.
 void	solve_quadratic(t_quadratic *q)
 {
-	double	discriminant;
+	const double	discriminant = q->half_b * q->half_b - q->a * q->c;
 
 	q->solved = false;
-	if (fabs(q->a) < 1e-3)
+	if (q->a == 0 || discriminant < 0 || discriminant == INFINITY
+		|| discriminant == -INFINITY)
 		return ;
-	discriminant = q->half_b * q->half_b - q->a * q->c;
-	if (discriminant < 0)
-		return ;
-	q->solved = true;
 	if (q->a < 0)
 	{
 		q->t1 = (-q->half_b + sqrt(discriminant)) / q->a;
@@ -34,4 +31,8 @@ void	solve_quadratic(t_quadratic *q)
 		q->t1 = (-q->half_b - sqrt(discriminant)) / q->a;
 		q->t2 = (-q->half_b + sqrt(discriminant)) / q->a;
 	}
+	if ((q->t1 == INFINITY || q->t1 == -INFINITY)
+		&& (q->t2 == INFINITY || q->t2 == -INFINITY))
+		return ;
+	q->solved = true;
 }
