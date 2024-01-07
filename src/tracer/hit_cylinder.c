@@ -22,7 +22,7 @@ static bool	set_rec_side(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
 	diff = vec3_sub(rec->point, conf.center);
 	rec->normal = vec3_normalize(vec3_sub(diff, vec3_project(diff, conf.axis)));
 	rec->material = cyl->material;
-	rec->object_color = conf.color;
+	rec->object_color = get_cylindrical_color_at(cyl, rec->point);
 	return (true);
 }
 
@@ -76,7 +76,8 @@ static bool	hit_cylinder_cap(t_object *cyl, t_ray ray, double tmin,
 		.center = cap_center,
 		.normal = cap_normal,
 		.radius = conf.radius,
-		.color = conf.color},
+		.color = conf.color,
+		.parent = cyl},
 		.material = cyl->material};
 	return (hit_circle(&circle, ray, tmin, rec));
 }

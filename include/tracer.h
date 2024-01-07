@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 04:36:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/26 06:55:23 by kemizuki         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:47:15 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,24 @@ typedef struct s_quadratic
 	double		t2;
 }				t_quadratic;
 void			solve_quadratic(t_quadratic *q);
+
+typedef struct s_checkers
+{
+	double		width;
+	double		height;
+	t_rgb		color_a;
+	t_rgb		color_b;
+}				t_checkers;
+t_checkers		create_checkers(double width, double height, t_object *obj);
+t_checkers		create_cylindrical_checkers(t_object *cyl);
+t_checkers		create_conical_checkers(t_object *cone);
+t_rgb			get_checker_color_at(t_checkers checkers, t_vec3 uv);
+void			set_checker_ratio(double a, double b, int *pa, int *pb);
+t_rgb			get_cylindrical_color_at(t_object *cyl, t_vec3 point);
+t_rgb			get_conical_color_at(t_object *cone, t_vec3 point);
+double			get_cylindrical_base_height(t_object *cyl);
+double			get_conical_base_height(t_object *cone);
+
+t_vec3			fix_by_axis(t_vec3 axis, t_vec3 center, t_vec3 p);
 
 #endif

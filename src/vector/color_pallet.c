@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_math.h                                          :+:      :+:    :+:   */
+/*   color_pallet.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 04:41:57 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 04:41:59 by kemizuki         ###   ########.fr       */
+/*   Created: 2023/12/30 14:32:37 by smatsuo           #+#    #+#             */
+/*   Updated: 2023/12/30 14:32:45 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MATH_H
-# define FT_MATH_H
+#include "vector.h"
 
-# include <math.h>
+t_rgb	white(void)
+{
+	return ((t_rgb){
+		.x = 0xFF,
+		.y = 0xFF,
+		.z = 0XFF,
+	});
+}
 
-int		ft_even(int n);
-int		ft_odd(int n);
-double	ft_pow(double base, int exponent);
-double	ft_to_radian(double degree);
-double	ft_to_degree(double radian);
-
-#endif
+t_rgb	black(void)
+{
+	return ((t_rgb){
+		.x = 0x0,
+		.y = 0x0,
+		.z = 0X0,
+	});
+}
