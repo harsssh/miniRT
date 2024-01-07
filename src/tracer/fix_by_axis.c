@@ -18,10 +18,10 @@ t_vec3	fix_by_axis(t_vec3 axis, t_vec3 center, t_vec3 p)
 	t_vec3					e1;
 	t_vec3					e2;
 
-	if (vec3_equal(axis, vec3_axis_y()))
+	if (vec3_parallel(axis, vec3_axis_y()))
 		return (translated_p);
 	e1 = vec3_cross(axis, vec3_axis_x());
-	if (vec3_equal(e1, vec3_zero()))
+	if (vec3_parallel(e1, vec3_zero()))
 		e1 = vec3_cross(axis, vec3_axis_z());
 	e1 = vec3_normalize(e1);
 	e2 = vec3_normalize(vec3_cross(axis, e1));
