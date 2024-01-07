@@ -6,7 +6,7 @@
 /*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:22:42 by smatsuo           #+#    #+#             */
-/*   Updated: 2023/12/27 22:40:01 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/07 12:01:48 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,17 @@ static bool	hit_cone_cap(t_object *cone, t_ray ray, double tmin,
 	return (hit_circle(&circle, ray, tmin, rec));
 }
 
+static bool	is_cap_closer(t_ray ray, double t,
+				t_hit_record *rec)
+{
+	const double	p = vec3_dot(vec3_sub(ray_at(ray, t), ray.origin),
+			ray.direction);
+	const double	cap = vec3_dot(vec3_sub(rec->point, ray.origin),
+			ray.direction);
+
+	return (cap < p);
+}
+
 bool	hit_cone(t_object *cone, t_ray ray, double tmin, t_hit_record *rec)
 {
 	const t_cone_conf	conf = *(t_cone_conf *)cone->conf;
@@ -67,11 +78,15 @@ bool	hit_cone(t_object *cone, t_ray ray, double tmin, t_hit_record *rec)
 	solve_quadratic(&q);
 	if (!q.solved)
 		return (false);
+	if (hit_cone_cap(cone, ray, tmin, rec) && is_cap_closer(ray, q.t1, rec))
+		return (true);
 	if (q.t1 > tmin && is_hit_side(conf, ray, q.t1))
 		return (set_rec(cone, ray, q.t1, rec));
-	if (hit_cone_cap(cone, ray, tmin, rec))
+	if (hit_cone_cap(cone, ray, tmin, rec) && is_cap_closer(ray, q.t2, rec))
 		return (true);
 	if (q.t2 > tmin && is_hit_side(conf, ray, q.t2))
 		return (set_rec(cone, ray, q.t2, rec));
+	if (hit_cone_cap(cone, ray, tmin, rec))
+		return (true);
 	return (false);
 }
