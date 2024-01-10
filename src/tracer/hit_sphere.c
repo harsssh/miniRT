@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 22:48:56 by kemizuki          #+#    #+#             */
-/*   Updated: 2024/01/02 07:45:23 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/11 02:32:09 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ static t_rgb	get_color_at(t_object *sphere, t_vec3 point)
 
 static void	set_rec(t_object *sphere, t_ray ray, double t, t_hit_record *rec)
 {
-	const t_sphere_conf	conf = *(t_sphere_conf *)sphere->conf;
-
 	rec->t = t;
 	rec->point = ray_at(ray, t);
-	rec->normal = get_spherical_normal(sphere, rec, spherical_map(sphere, rec->point));
+	rec->normal = get_spherical_normal(sphere, rec,
+			spherical_map(sphere, rec->point));
 	rec->material = sphere->material;
 	rec->object_color = get_color_at(sphere, rec->point);
 }

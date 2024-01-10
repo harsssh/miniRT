@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 06:57:02 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/26 10:26:14 by kemizuki         ###   ########.fr       */
+/*   Updated: 2024/01/11 02:31:51 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static bool	set_rec_side(t_object *cyl, t_ray ray, double t, t_hit_record *rec)
 {
 	rec->t = t;
 	rec->point = ray_at(ray, t);
-	rec->normal = get_cylindrical_normal(cyl, rec, cylindrical_map(cyl, rec->point));
+	rec->normal = get_cylindrical_normal(cyl, rec,
+			cylindrical_map(cyl, rec->point));
 	rec->material = cyl->material;
 	rec->object_color = get_cylindrical_color_at(cyl, rec->point);
 	return (true);

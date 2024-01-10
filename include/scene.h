@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/27 20:46:16 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/11 02:35:06 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 # include "vector.h"
-#include "mlx_utils.h"
+# include "mlx_utils.h"
 # include <stdbool.h>
 # include <stdlib.h>
 
@@ -110,10 +110,10 @@ typedef struct s_height_map
 	int				bpp;
 	int				line_length;
 	int				endian;
-	int 			width;
-	int 			height;
-	double 			pixel_w;
-	double 			pixel_h;
+	int				width;
+	int				height;
+	double			pixel_w;
+	double			pixel_h;
 }					t_height_map;
 t_height_map		load_height_map(char *path, t_mlx *mlx);
 

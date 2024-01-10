@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   planar_bump.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smatsuo <smatsuo@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/11 02:27:26 by smatsuo           #+#    #+#             */
+/*   Updated: 2024/01/11 02:27:36 by smatsuo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tracer.h"
 #include "config.h"
 
 t_vec3	get_planar_normal(t_object *plane, t_vec3 uv)
 {
-	const t_plane_conf 	conf = *(t_plane_conf *)plane->conf;
+	const t_plane_conf	conf = *(t_plane_conf *)plane->conf;
 	const t_height_map	map = plane->material.height_map;
 	t_vec_pair			p;
-	int 				ratio;
+	int					ratio;
 
 	if (map.img == NULL)
 		return (conf.normal);

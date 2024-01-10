@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 04:36:05 by kemizuki          #+#    #+#             */
-/*   Updated: 2024/01/02 18:47:15 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/11 02:34:32 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,14 @@ typedef struct s_vec_pair
 	t_vec3		second;
 }				t_vec_pair;
 
-t_vec3			get_normal_at(t_height_map map, t_vec3 uv, t_vec_pair p, t_vec3 normal);
-t_vec3			get_spherical_normal(t_object *plane, t_hit_record *rec, t_vec3 uv);
+t_vec3			get_normal_at(t_height_map map, t_vec3 uv, t_vec_pair p,
+					t_vec3 normal);
+t_vec3			get_spherical_normal(t_object *plane, t_hit_record *rec,
+					t_vec3 uv);
 t_vec3			get_planar_normal(t_object *plane, t_vec3 uv);
-t_vec3			get_cylindrical_normal(t_object* cyl, t_hit_record *rec, t_vec3 uv);
-t_vec3			get_conical_normal(t_object* cyl, t_hit_record *rec, t_vec3 uv);
+t_vec3			get_cylindrical_normal(t_object *cyl, t_hit_record *rec,
+					t_vec3 uv);
+t_vec3			get_conical_normal(t_object *cyl, t_hit_record *rec, t_vec3 uv);
 
 t_vec3			fix_by_axis(t_vec3 axis, t_vec3 center, t_vec3 p);
 
