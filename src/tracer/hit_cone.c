@@ -14,13 +14,9 @@
 
 static bool	set_rec(t_object *cone, t_ray ray, double t, t_hit_record *rec)
 {
-	const t_cone_conf	conf = *(t_cone_conf *)cone->conf;
-	const t_vec3		pc = vec3_sub(ray_at(ray, t), conf.apex);
-
 	rec->t = t;
 	rec->point = ray_at(ray, t);
-	rec->normal = vec3_normalize(vec3_sub(pc, vec3_scale(conf.axis,
-					vec3_dot(pc, pc) / vec3_dot(conf.axis, pc))));
+	rec->normal = get_conical_normal(cone, rec, conical_map(cone, rec->point));
 	rec->material = cone->material;
 	rec->object_color = get_conical_color_at(cone, rec->point);
 	return (true);

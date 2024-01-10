@@ -18,6 +18,8 @@
 # include "ray.h"
 # include "scene.h"
 
+# define HEIGHT_SCALE 40
+
 void			render_scene(t_mlx *mlx, t_scene *scene);
 
 // internal
@@ -51,6 +53,9 @@ bool			hit_circle(t_object *circ, t_ray ray, double tmin,
 bool			hit_cone(t_object *cone, t_ray ray, double tmin,
 					t_hit_record *rec);
 
+t_vec3			cylindrical_map(t_object *cyl, t_vec3 p);
+t_vec3			conical_map(t_object *cone, t_vec3 p);
+
 typedef struct s_quadratic
 {
 	double		a;
@@ -78,6 +83,18 @@ t_rgb			get_cylindrical_color_at(t_object *cyl, t_vec3 point);
 t_rgb			get_conical_color_at(t_object *cone, t_vec3 point);
 double			get_cylindrical_base_height(t_object *cyl);
 double			get_conical_base_height(t_object *cone);
+
+typedef struct s_vec_pair
+{
+	t_vec3		first;
+	t_vec3		second;
+}				t_vec_pair;
+
+t_vec3			get_normal_at(t_height_map map, t_vec3 uv, t_vec_pair p, t_vec3 normal);
+t_vec3			get_spherical_normal(t_object *plane, t_hit_record *rec, t_vec3 uv);
+t_vec3			get_planar_normal(t_object *plane, t_vec3 uv);
+t_vec3			get_cylindrical_normal(t_object* cyl, t_hit_record *rec, t_vec3 uv);
+t_vec3			get_conical_normal(t_object* cyl, t_hit_record *rec, t_vec3 uv);
 
 t_vec3			fix_by_axis(t_vec3 axis, t_vec3 center, t_vec3 p);
 

@@ -20,6 +20,8 @@ bool	is_illuminated(t_scene *scene, t_light_conf light, t_hit_record rec)
 	const t_ray		shadow_ray = new_ray(rec.point,
 			vec3_normalize(vec3_sub(light.position, rec.point)));
 
+	if(vec3_dot(rec.normal, shadow_ray.direction) < 0)
+		return (false);
 	obj_node = scene->objects->head;
 	while (obj_node)
 	{

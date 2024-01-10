@@ -23,7 +23,7 @@ static void	add_light(t_scene *config, t_light_conf light)
 	ft_list_push_back(config->lights, light_ptr);
 }
 
-static void	parse_line(t_scene *config, const char *line, t_parse_state *state)
+static void	parse_line(t_scene *config, const char *line, t_parse_state *state, t_parse_option opt)
 {
 	if (ft_strncmp(line, "A", 1) == 0)
 	{
@@ -41,7 +41,7 @@ static void	parse_line(t_scene *config, const char *line, t_parse_state *state)
 		++(state->light_count);
 	}
 	else
-		ft_list_push_back(config->objects, parse_object(line));
+		ft_list_push_back(config->objects, parse_object(line, opt));
 }
 
 static void	validate_state(t_parse_state state, t_parse_option opt)
@@ -75,7 +75,7 @@ t_scene	*parse_scene(const char *path, t_parse_option opt)
 		if (line == NULL)
 			break ;
 		if (*line != '\n' && *line != '#')
-			parse_line(scene, line, &state);
+			parse_line(scene, line, &state, opt);
 		free(line);
 	}
 	validate_state(state, opt);

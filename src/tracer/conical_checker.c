@@ -12,11 +12,10 @@
 
 #include "tracer.h"
 
-static t_vec3	conical_map(t_object *cone, t_vec3 p)
+t_vec3	conical_map(t_object *cone, t_vec3 p)
 {
 	const t_cone_conf	conf = *(t_cone_conf *)cone->conf;
-	const t_vec3		fixed_p = fix_by_axis(conf.axis,
-			vec3_add_scaled(conf.apex, conf.axis, -conf.height), p);
+	const t_vec3		fixed_p = fix_by_axis(conf.axis, conf.apex, p);
 	const double		theta = atan2(fixed_p.x, fixed_p.z);
 	const double		raw_u = theta / (2 * M_PI);
 

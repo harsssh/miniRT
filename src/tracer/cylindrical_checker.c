@@ -12,7 +12,7 @@
 
 #include "tracer.h"
 
-static t_vec3	cylindrical_map(t_object *cyl, t_vec3 p)
+t_vec3	cylindrical_map(t_object *cyl, t_vec3 p)
 {
 	const t_cylinder_conf	conf = *(t_cylinder_conf *)cyl->conf;
 	const t_vec3			fixed_p = fix_by_axis(conf.axis, conf.center, p);
@@ -21,7 +21,7 @@ static t_vec3	cylindrical_map(t_object *cyl, t_vec3 p)
 
 	return ((t_vec3){
 		.x = 1 - (raw_u + 0.5),
-		.y = fmod(fixed_p.y / conf.height, 1),
+		.y = fixed_p.y / conf.height,
 	});
 }
 

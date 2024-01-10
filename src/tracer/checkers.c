@@ -54,6 +54,8 @@ void	set_checker_ratio(double a, double b, int *pa, int *pb)
 		a *= 10;
 		b *= 10;
 	}
-	*pa = a;
-	*pb = b;
+	if (pa != NULL)
+		*pa = a;
+	if (pb != NULL)
+		*pb = b;
 }

@@ -22,7 +22,7 @@ static t_vec3	circular_map(t_object *circ, t_vec3 p)
 
 	return ((t_vec3){
 		.x = 1 - (raw_u + 0.5),
-		.y = fmod(r / conf.radius, 1),
+		.y = r / conf.radius,
 	});
 }
 

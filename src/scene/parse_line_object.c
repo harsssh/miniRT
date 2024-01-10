@@ -48,7 +48,7 @@ static void	parse_object_conf(t_object *object, const char *line)
 }
 
 // key:value
-static void	parse_material_key_value(t_material *material, const char *str)
+static void	parse_material_key_value(t_material *material, const char *str, t_parse_option opt)
 {
 	char	*delim_pos;
 	size_t	key_len;
@@ -71,13 +71,13 @@ static void	parse_material_key_value(t_material *material, const char *str)
 		material->check_color = rgb_normalize(parse_rgb(delim_pos + 1));
 	}
 	else if (ft_strncmp(str, "bump", key_len) == 0)
-		material->height_map = ft_strdup(delim_pos + 1);
+		material->height_map = load_height_map(ft_strdup(delim_pos + 1), opt.mlx);
 	else
 		exit_with_error(EXIT_PARSE_ERROR, "parse_material: invalid key");
 }
 
 // spec:0.5 diff:0.5 shin:10 check:0,0,0 bump:height_map.png
-static void	parse_material(t_material *material, const char *line)
+static void	parse_material(t_material *material, const char *line, t_parse_option opt)
 {
 	char	**split;
 	char	**ptr;
@@ -86,7 +86,7 @@ static void	parse_material(t_material *material, const char *line)
 	ptr = split;
 	while (*ptr)
 	{
-		parse_material_key_value(material, *ptr);
+		parse_material_key_value(material, *ptr, opt);
 		++ptr;
 	}
 	if (!is_in_range(material->diffuse_reflectance, 0, 1))
@@ -100,7 +100,7 @@ static void	parse_material(t_material *material, const char *line)
 	free_array(split);
 }
 
-t_object	*parse_object(const char *line)
+t_object	*parse_object(const char *line, t_parse_option opt)
 {
 	t_object	*object;
 	char		*line_copy;
@@ -116,7 +116,7 @@ t_object	*parse_object(const char *line)
 	if (delim_pos != NULL)
 	{
 		*delim_pos = '\0';
-		parse_material(&object->material, delim_pos + 1);
+		parse_material(&object->material, delim_pos + 1, opt);
 	}
 	parse_object_conf(object, line_copy);
 	free(line_copy);
