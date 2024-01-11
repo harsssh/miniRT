@@ -94,7 +94,7 @@ t_vec3			get_normal_at(t_height_map map, t_vec3 uv, t_vec_pair p,
 					t_vec3 normal);
 t_vec3			get_spherical_normal(t_object *plane, t_hit_record *rec,
 					t_vec3 uv);
-t_vec3			get_planar_normal(t_object *plane, t_vec3 uv);
+t_vec3			get_planar_normal(t_object *plane, t_vec3 normal, t_vec3 uv);
 t_vec3			get_cylindrical_normal(t_object *cyl, t_hit_record *rec,
 					t_vec3 uv);
 t_vec3			get_conical_normal(t_object *cyl, t_hit_record *rec, t_vec3 uv);

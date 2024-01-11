@@ -13,7 +13,7 @@
 #include "tracer.h"
 #include "config.h"
 
-t_vec3	get_planar_normal(t_object *plane, t_vec3 uv)
+t_vec3	get_planar_normal(t_object *plane, t_vec3 normal, t_vec3 uv)
 {
 	const t_plane_conf	conf = *(t_plane_conf *)plane->conf;
 	const t_height_map	map = plane->material.height_map;
@@ -29,5 +29,5 @@ t_vec3	get_planar_normal(t_object *plane, t_vec3 uv)
 		p.first = vec3_cross(conf.normal, vec3_axis_z());
 	p.first = vec3_normalize(p.first);
 	p.second = vec3_normalize(vec3_cross(conf.normal, p.first));
-	return (get_normal_at(map, uv, p, conf.normal));
+	return (get_normal_at(map, uv, p, normal));
 }
