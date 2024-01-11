@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 02:30:39 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/30 16:18:15 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/11 10:32:31 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static void	set_rec(t_object *plane, t_ray ray, double t, t_hit_record *rec)
 		normal = conf.normal;
 	else
 		normal = vec3_negate(conf.normal);
-	rec->normal = get_planar_normal(plane, normal, planar_map(normal, rec->point));
+	rec->normal = get_planar_normal(plane, normal,
+			planar_map(normal, rec->point));
 	rec->material = plane->material;
 	rec->object_color = get_color_at(plane, normal, rec->point);
 }
