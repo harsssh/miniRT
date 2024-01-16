@@ -36,10 +36,10 @@ t_vec3	get_spherical_normal(t_object *sphere, t_hit_record *rec, t_vec3 uv)
 	if (map.img == NULL)
 		return (normal);
 	p.first = vec3_normalize(vec3_sub(
-				uv_to_spherical(sphere, vec3(uv.x + map.pixel_w, uv.y, uv.z)),
-				uv_to_spherical(sphere, vec3(uv.x - map.pixel_w, uv.y, uv.z))));
+				uv_to_spherical(sphere, vec3(uv.x - map.pixel_w, uv.y, uv.z)),
+				uv_to_spherical(sphere, vec3(uv.x + map.pixel_w, uv.y, uv.z))));
 	p.second = vec3_normalize(vec3_sub(
-				uv_to_spherical(sphere, vec3(uv.x, uv.y + map.pixel_h, uv.z)),
-				uv_to_spherical(sphere, vec3(uv.x, uv.y - map.pixel_h, uv.z))));
+				uv_to_spherical(sphere, vec3(uv.x, uv.y - map.pixel_h, uv.z)),
+				uv_to_spherical(sphere, vec3(uv.x, uv.y + map.pixel_h, uv.z))));
 	return (get_normal_at(map, uv, p, normal));
 }

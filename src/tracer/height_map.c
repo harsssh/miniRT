@@ -42,6 +42,6 @@ t_vec3	get_normal_at(t_height_map map, t_vec3 uv, t_vec_pair p, t_vec3 normal)
 	diff.z = HEIGHT_SCALE;
 	diff = vec3_normalize(diff);
 	return (vec3_add(normal, vec3_sub(
-				vec3_scale(vec3_cross(normal, p.first), diff.x),
-				vec3_scale(vec3_cross(normal, p.second), diff.y))));
+				vec3_scale(vec3_cross(p.first, normal), diff.x),
+				vec3_scale(vec3_cross(p.second, normal), diff.y))));
 }
