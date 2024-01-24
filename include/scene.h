@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 06:43:04 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/27 20:46:16 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/11 02:35:06 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "vector.h"
+# include "mlx_utils.h"
 # include <stdbool.h>
 # include <stdlib.h>
 
@@ -24,33 +25,6 @@
 # define DEFAULT_DIFFUSE_REFLECTANCE 0.5
 # define DEFAULT_SPECULAR_REFLECTANCE 0.25
 # define DEFAULT_SHININESS 8
-
-typedef enum e_object_type
-{
-	OBJ_SPHERE,
-	OBJ_PLANE,
-	OBJ_CYLINDER,
-	OBJ_CONE,
-	OBJ_CIRCLE
-}					t_object_type;
-
-typedef struct s_material
-{
-	double			diffuse_reflectance;
-	double			specular_reflectance;
-	double			ambient_reflectance;
-	double			shininess;
-	bool			checker;
-	t_rgb			check_color;
-	const char		*height_map;
-}					t_material;
-
-typedef struct s_object
-{
-	t_object_type	type;
-	void			*conf;
-	t_material		material;
-}					t_object;
 
 // color: [0, 255]
 
@@ -108,6 +82,8 @@ typedef struct s_cone_conf
 	t_rgb			color;
 }					t_cone_conf;
 
+typedef struct s_object	t_object;
+
 typedef struct s_circle_conf
 {
 	t_vec3			center;
@@ -116,6 +92,48 @@ typedef struct s_circle_conf
 	t_rgb			color;
 	t_object		*parent;
 }					t_circle_conf;
+
+typedef enum e_object_type
+{
+	OBJ_SPHERE,
+	OBJ_PLANE,
+	OBJ_CYLINDER,
+	OBJ_CONE,
+	OBJ_CIRCLE
+}					t_object_type;
+
+typedef struct s_height_map
+{
+	const char		*path;
+	void			*img;
+	void			*addr;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	int				width;
+	int				height;
+	double			pixel_w;
+	double			pixel_h;
+}					t_height_map;
+t_height_map		load_height_map(char *path, t_mlx *mlx);
+
+typedef struct s_material
+{
+	double			diffuse_reflectance;
+	double			specular_reflectance;
+	double			ambient_reflectance;
+	double			shininess;
+	bool			checker;
+	t_rgb			check_color;
+	t_height_map	height_map;
+}					t_material;
+
+struct s_object
+{
+	t_object_type	type;
+	void			*conf;
+	t_material		material;
+};
 
 // lights: list<t_light_config>
 // objects: list<t_object>
@@ -130,6 +148,7 @@ typedef struct s_scene
 typedef struct s_parse_option
 {
 	unsigned int	max_light;
+	t_mlx			*mlx;
 }					t_parse_option;
 
 // exit with error if failed
@@ -144,7 +163,7 @@ t_plane_conf		parse_plane(const char *line);
 t_sphere_conf		parse_sphere(const char *line);
 t_cylinder_conf		parse_cylinder(const char *line);
 t_cone_conf			parse_cone(const char *line);
-t_object			*parse_object(const char *line);
+t_object			*parse_object(const char *line, t_parse_option opt);
 
 // internal utils
 unsigned int		parse_uint(const char *str);

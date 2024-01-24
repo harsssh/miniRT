@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 22:48:56 by kemizuki          #+#    #+#             */
-/*   Updated: 2024/01/02 07:45:23 by smatsuo          ###   ########.fr       */
+/*   Updated: 2024/01/11 02:32:09 by smatsuo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ static t_vec3	spherical_map(t_object *sphere, t_vec3 p)
 	const t_vec3		fixed_p = vec3_sub(p, conf.center);
 	const double		theta = atan2(fixed_p.x, fixed_p.z);
 	const double		phi = acos(fixed_p.y / conf.radius);
-	const double		raw_u = theta / (2 * M_PI);
+	const double		raw_u = theta / M_PI;
 
 	return ((t_vec3){
 		.x = 1 - (raw_u + 0.5),
-		.y = 1 - phi / M_PI,
+		.y = phi / M_PI,
 	});
 }
 
 static t_rgb	get_color_at(t_object *sphere, t_vec3 point)
 {
 	const t_sphere_conf	conf = *(t_sphere_conf *)sphere->conf;
-	const t_checkers	checkers = create_checkers(20, 10, sphere);
+	const t_checkers	checkers = create_checkers(10, 10, sphere);
 	const t_vec3		spherical_point = spherical_map(sphere, point);
 
 	if (!sphere->material.checker)
@@ -39,11 +39,10 @@ static t_rgb	get_color_at(t_object *sphere, t_vec3 point)
 
 static void	set_rec(t_object *sphere, t_ray ray, double t, t_hit_record *rec)
 {
-	const t_sphere_conf	conf = *(t_sphere_conf *)sphere->conf;
-
 	rec->t = t;
 	rec->point = ray_at(ray, t);
-	rec->normal = vec3_div(vec3_sub(rec->point, conf.center), conf.radius);
+	rec->normal = get_spherical_normal(sphere, rec,
+			spherical_map(sphere, rec->point));
 	rec->material = sphere->material;
 	rec->object_color = get_color_at(sphere, rec->point);
 }

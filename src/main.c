@@ -10,14 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "config.h"
 #include "mlx_utils.h"
 #include "tracer.h"
 #include <limits.h>
 #include <stdio.h>
-
-#define WIDTH 1024
-#define HEIGHT 768
-#define TITLE "miniRT"
 
 static bool	is_rt_file(char *filename)
 {
@@ -30,9 +27,9 @@ static bool	is_rt_file(char *filename)
 
 int	main(int argc, char **argv)
 {
-	const t_parse_option	opt = {.max_light = UINT_MAX};
-	t_scene					*scene;
-	t_mlx					*mlx;
+	t_parse_option	opt;
+	t_scene			*scene;
+	t_mlx			*mlx;
 
 	if (argc != 2)
 	{
@@ -44,8 +41,10 @@ int	main(int argc, char **argv)
 		printf("Error: %s is not a .rt file\n", argv[1]);
 		return (EXIT_FAILURE);
 	}
+	mlx = new_mlx(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+	opt.mlx = mlx;
+	opt.max_light = UINT_MAX;
 	scene = parse_scene(argv[1], opt);
-	mlx = new_mlx(WIDTH, HEIGHT, TITLE);
 	render_scene(mlx, scene);
 	render_loop(mlx);
 }

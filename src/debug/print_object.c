@@ -58,8 +58,8 @@ void	print_material(t_material mat)
 		"ambient=%.1lf, shininess=%.1lf",
 		mat.diffuse_reflectance, mat.specular_reflectance,
 		mat.ambient_reflectance, mat.shininess);
-	if (mat.height_map)
-		printf(", height_map=%s", mat.height_map);
+	if (mat.height_map.path)
+		printf(", height_map=%s", mat.height_map.path);
 	if (mat.checker)
 	{
 		printf(", check_color=");
