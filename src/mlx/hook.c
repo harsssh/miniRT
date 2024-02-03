@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 06:02:32 by kemizuki          #+#    #+#             */
-/*   Updated: 2024/02/03 19:47:17 by kemizuki         ###   ########.fr       */
+/*   Created: 2024/02/03 19:27:51 by kemizuki          #+#    #+#             */
+/*   Updated: 2024/02/03 19:28:04 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_utils.h"
 #include <stdlib.h>
 
-void	render_loop(t_mlx *mlx)
+int	hook_terminate(void)
 {
-	mlx_put_image_to_window(mlx->mlx, mlx->window, mlx->img, 0, 0);
-	mlx_loop(mlx->mlx);
 	exit(EXIT_SUCCESS);
 }
