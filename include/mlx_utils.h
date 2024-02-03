@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 06:02:06 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/19 06:02:09 by kemizuki         ###   ########.fr       */
+/*   Updated: 2024/02/03 19:49:30 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@ t_mlx		*new_mlx(int width, int height, char *title);
 void		free_mlx(t_mlx *mlx);
 void		put_pixel_to_image(t_mlx *mlx, int x, int y, int color);
 void		render_loop(t_mlx *mlx);
+
+// internal
+int			destroy_handler(void);
+int			key_handler(int key, void *param);
+int			visible_handler(t_mlx *mlx);
 
 #endif

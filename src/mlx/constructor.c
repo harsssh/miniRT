@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 06:02:17 by kemizuki          #+#    #+#             */
-/*   Updated: 2023/12/25 04:36:53 by kemizuki         ###   ########.fr       */
+/*   Updated: 2024/02/03 19:50:18 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <stdlib.h>
-
-// NOTE: ESCAPE_KEY may be different depending on the environment.
-#if defined(XK_Escape)
-# define ESCAPE_KEY XK_Escape
-#else
-# define ESCAPE_KEY 0xff1b
-#endif
 
 static void	init_mlx(t_mlx *mlx, int width, int height, char *title)
 {
@@ -42,22 +35,12 @@ static void	init_mlx(t_mlx *mlx, int width, int height, char *title)
 	mlx->height = height;
 }
 
-static int	terminate(void)
-{
-	exit(EXIT_SUCCESS);
-}
-
-static int	key_handler(int key, void *param)
-{
-	(void)param;
-	if (key == ESCAPE_KEY)
-		terminate();
-	return (0);
-}
-
 static void	init_event_handler(t_mlx *mlx)
 {
-	mlx_hook(mlx->window, DestroyNotify, StructureNotifyMask, terminate, NULL);
+	mlx_hook(mlx->window, DestroyNotify, StructureNotifyMask,
+		destroy_handler, NULL);
+	mlx_hook(mlx->window, VisibilityNotify, VisibilityChangeMask,
+		visible_handler, mlx);
 	mlx_key_hook(mlx->window, key_handler, NULL);
 }
 
