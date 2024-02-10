@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install norminette
-        run: python3 -m pip install norminette
+        run: python3 -m pip install norminette==3.3.51
       - name: Run norminette
         run: norminette libft include src
