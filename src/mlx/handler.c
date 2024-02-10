@@ -6,7 +6,7 @@
 /*   By: kemizuki <kemizuki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:39:30 by kemizuki          #+#    #+#             */
-/*   Updated: 2024/02/03 19:49:39 by kemizuki         ###   ########.fr       */
+/*   Updated: 2024/02/10 12:34:50 by kemizuki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 #include <stdlib.h>
 
 // NOTE: ESCAPE_KEY may be different depending on the environment.
-#if defined(XK_Escape)
-# define ESCAPE_KEY XK_Escape
-#else
-# define ESCAPE_KEY 0xff1b
-#endif
+#define ESCAPE_KEY 0xff1b  // for MacOS
 
 int	destroy_handler(void)
 {
